@@ -70,7 +70,7 @@ A modern, comprehensive fitness tracking web application with interactive workou
    ```
 
 5. Access Application
-   - Main App: http://localhost:3000
+   - Main App: https://fitness-guide-howq.onrender.com
    - Admin Panel: http://localhost:3000/admin-login.html
 
 ## Project Architecture
