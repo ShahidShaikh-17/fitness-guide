@@ -39,11 +39,11 @@
     "npm": ">=6.0.0"
   },
   "repository": {
-    "type": "git",
-    "url": "https://github.com/your-username/fitness-guide.git"
-  },
-  "bugs": {
-    "url": "https://github.com/your-username/fitness-guide/issues"
-  },
-  "homepage": "https://github.com/your-username/fitness-guide#readme"
+  "type": "git",
+  "url": "https://github.com/ShahidShaikh-17/fitness-guide.git"
+},
+"bugs": {
+  "url": "https://github.com/ShahidShaikh-17/fitness-guide/issues"
+},
+"homepage": "https://github.com/ShahidShaikh-17/fitness-guide#readme"
 }
