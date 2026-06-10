@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARM Workout | FITNESS GUIDE</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            transition: all 0.3s ease;
+        }
+
+        .dark-mode {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        }
+
+        .workout-container {
+            max-width: 900px;
+            margin: 100px auto 50px;
+            padding: 20px;
+        }
+
+        .workout-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .workout-title {
+            font-size: 3.5em;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ff6b6b, #ffd93d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .workout-subtitle {
+            font-size: 1.3em;
+            color: rgba(255,255,255,0.9);
+            font-weight: 300;
+            margin-bottom: 30px;
+        }
+
+        .dark-mode .workout-subtitle {
+            color: rgba(255,255,255,0.8);
+        }
+
+        .workout-stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .stat-card {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 20px;
+            padding: 20px 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .dark-mode .stat-card {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.25);
+        }
+
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 0.9em;
+            color: rgba(255,255,255,0.8);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .exercises-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .exercise-card {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 20px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dark-mode .exercise-card {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+
+        .exercise-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255,255,255,0.25);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .exercise-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ff6b6b, #ffd93d, #4ecdc4);
+            border-radius: 20px 20px 0 0;
+        }
+
+        .exercise-name {
+            font-size: 1.4em;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .exercise-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #ff6b6b, #ffd93d);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            flex-shrink: 0;
+        }
+
+        .exercise-details {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+
+        .rest-card {
+            background: rgba(255,107,107,0.2);
+            border: 1px solid rgba(255,107,107,0.3);
+        }
+
+        .rest-card .exercise-icon {
+            background: linear-gradient(135deg, #ff6b6b, #ff8a80);
+        }
+
+        .workout-navigation-section {
+            text-align: center;
+            margin-top: 50px;
+            margin-bottom: 30px;
+        }
+
+        .workout-navigation-section h3 {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.4em;
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+
+        .nav-cards {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .nav-card {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95em;
+            transition: all 0.3s ease;
+            text-align: center;
+            min-width: 120px;
+        }
+
+        .nav-card:hover {
+            background: rgba(255,255,255,0.25);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .start-workout-section {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .start-btn {
+            background: linear-gradient(135deg, #ff6b6b, #ffd93d);
+            color: white;
+            border: none;
+            padding: 20px 50px;
+            font-size: 1.3em;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(255,107,107,0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .start-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255,107,107,0.4);
+            background: linear-gradient(135deg, #ff5252, #ffeb3b);
+        }
+
+        .back-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 15px 30px;
+            font-size: 1.1em;
+            font-weight: 500;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-right: 20px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .back-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .workout-title {
+                font-size: 2.5em;
+            }
+            
+            .workout-stats {
+                gap: 15px;
+            }
+            
+            .stat-card {
+                padding: 15px 20px;
+            }
+            
+            .exercises-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .start-btn {
+                padding: 18px 40px;
+                font-size: 1.1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <div class="Nav-bar">   
+        <nav>
+            <h2 id="logo"><span>FITNESS GUIDE</span></h2>
+            <ul>
+                <li><a href="../main.html">Main</a></li>
+                <li><a href="../Home.html">Home</a></li>
+                <li><a href="../about.html">About</a></li>
+                <li><a href="../contact.html">Contact</a></li> 
+                <li><a href="../Help.html">Help</a></li> 
+                <li><button class="theme-toggle-nav" id="themeToggleNav">
+                    <span id="themeIconNav">🌙</span>
+                </button></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="workout-container">
+        <div class="workout-header">
+            <h1 class="workout-title">ARM WORKOUT</h1>
+            <p class="workout-subtitle">Build strong and defined arms with these powerful exercises</p>
+            
+            <div class="workout-stats">
+                <div class="stat-card">
+                    <div class="stat-number">5</div>
+                    <div class="stat-label">Exercises</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">~16</div>
+                    <div class="stat-label">Minutes</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">💪</div>
+                    <div class="stat-label">Power</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="exercises-grid">
+            <div class="exercise-card">
+                <div class="exercise-name">
+                    <div class="exercise-icon">👊</div>
+                    Punches
+                </div>
+                <div class="exercise-details">
+                    <strong>Duration:</strong> 30 seconds<br>
+                    <strong>Target:</strong> Arms and shoulders<br>
+                    <strong>Tip:</strong> Keep your core tight and punch with control
+                </div>
+            </div>
+
+            <div class="exercise-card rest-card">
+                <div class="exercise-name">
+                    <div class="exercise-icon">⏱️</div>
+                    Rest Break
+                </div>
+                <div class="exercise-details">
+                    <strong>Duration:</strong> 5 seconds<br>
+                    <strong>Action:</strong> Shake out your arms and prepare
+                </div>
+            </div>
+
+            <div class="exercise-card">
+                <div class="exercise-name">
+                    <div class="exercise-icon">💎</div>
+                    Diamond Push-Ups
+                </div>
+                <div class="exercise-details">
+                    <strong>Reps:</strong> 20 repetitions<br>
+                    <strong>Target:</strong> Triceps and chest<br>
+                    <strong>Tip:</strong> Form a diamond shape with your hands
+                </div>
+            </div>
+
+            <div class="exercise-card rest-card">
+                <div class="exercise-name">
+                    <div class="exercise-icon">⏱️</div>
+                    Rest Break
+                </div>
+                <div class="exercise-details">
+                    <strong>Duration:</strong> 5 seconds<br>
+                    <strong>Action:</strong> Take deep breaths
+                </div>
+            </div>
+
+            <div class="exercise-card">
+                <div class="exercise-name">
+                    <div class="exercise-icon">🧱</div>
+                    Wall Push-Ups
+                </div>
+                <div class="exercise-details">
+                    <strong>Reps:</strong> 16 repetitions<br>
+                    <strong>Target:</strong> Arms and chest<br>
+                    <strong>Tip:</strong> Stand arm's length from the wall
+                </div>
+            </div>
+
+            <div class="exercise-card rest-card">
+                <div class="exercise-name">
+                    <div class="exercise-icon">⏱️</div>
+                    Rest Break
+                </div>
+                <div class="exercise-details">
+                    <strong>Duration:</strong> 5 seconds<br>
+                    <strong>Action:</strong> Prepare for bicep curls
+                </div>
+            </div>
+
+            <div class="exercise-card">
+                <div class="exercise-name">
+                    <div class="exercise-icon">🏋️</div>
+                    Leg Barbell Curl Left
+                </div>
+                <div class="exercise-details">
+                    <strong>Reps:</strong> 16 repetitions<br>
+                    <strong>Target:</strong> Left bicep<br>
+                    <strong>Tip:</strong> Control the movement, don't swing
+                </div>
+            </div>
+
+            <div class="exercise-card rest-card">
+                <div class="exercise-name">
+                    <div class="exercise-icon">⏱️</div>
+                    Rest Break
+                </div>
+                <div class="exercise-details">
+                    <strong>Duration:</strong> 5 seconds<br>
+                    <strong>Action:</strong> Switch to right arm
+                </div>
+            </div>
+
+            <div class="exercise-card">
+                <div class="exercise-name">
+                    <div class="exercise-icon">🏋️</div>
+                    Leg Barbell Curl Right
+                </div>
+                <div class="exercise-details">
+                    <strong>Reps:</strong> 16 repetitions<br>
+                    <strong>Target:</strong> Right bicep<br>
+                    <strong>Tip:</strong> Maintain proper form throughout
+                </div>
+            </div>
+        </div>
+
+        <div class="workout-navigation-section">
+            <h3>Explore Other Workouts</h3>
+            <div class="nav-cards">
+                <a href="abs.html" class="nav-card">
+                    <div>🧘‍♀️</div>
+                    <div>Abs</div>
+                </a>
+                <a href="chest.html" class="nav-card">
+                    <div>🏋️‍♂️</div>
+                    <div>Chest</div>
+                </a>
+                <a href="back.html" class="nav-card">
+                    <div>🔄</div>
+                    <div>Back</div>
+                </a>
+                <a href="leg.html" class="nav-card">
+                    <div>🦵</div>
+                    <div>Legs</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="start-workout-section">
+            <a href="../main.html" class="back-btn">← Back to Main</a>
+            <button class="start-btn" onclick="location.href='Arm-workout.html'">
+                🚀 Start Workout
+            </button>
+        </div>
+    </div>
+
+    <script src="../assets/js/script.js"></script>
+    <script>
+        // Theme toggle functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggle = document.getElementById('themeToggleNav');
+            const themeIcon = document.getElementById('themeIconNav');
+            
+            if (themeToggle && themeIcon) {
+                themeToggle.addEventListener('click', function() {
+                    document.body.classList.toggle('dark-mode');
+                    const isDark = document.body.classList.contains('dark-mode');
+                    
+                    if (isDark) {
+                        themeIcon.textContent = '☀️';
+                        localStorage.setItem('theme', 'dark');
+                    } else {
+                        themeIcon.textContent = '🌙';
+                        localStorage.setItem('theme', 'light');
+                    }
+                    
+                    // Trigger storage event for other tabs/windows
+                    window.dispatchEvent(new StorageEvent('storage', {
+                        key: 'theme',
+                        newValue: isDark ? 'dark' : 'light',
+                        storageArea: localStorage
+                    }));
+                });
+            }
+        });
+    </script>
+</body>
+</html>

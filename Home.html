@@ -1,0 +1,1629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings | FITNESS GUIDE</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        /* User Profile Section */
+        .user-profile-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            margin: 120px 20px 30px;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .user-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 10px;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .user-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            font-weight: bold;
+            border: 3px solid rgba(255,255,255,0.3);
+            transition: all 0.3s ease;
+        }
+
+        .user-avatar:hover {
+            transform: scale(1.05);
+            background: rgba(255,255,255,0.35);
+        }
+
+        .user-details h3 {
+            margin: 0 0 8px 0;
+            font-size: 1.8em;
+            font-weight: 600;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .user-details p {
+            margin: 4px 0;
+            opacity: 0.95;
+            font-size: 1.05em;
+        }
+
+        .user-actions {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .theme-toggle {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .theme-toggle:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+
+        .logout-btn {
+            background: #ff4757;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .logout-btn:hover {
+            background: #ff3742;
+            transform: translateY(-2px);
+        }
+
+        .clear-data-btn {
+            background: #dc3545;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+
+        .clear-data-btn:hover {
+            background: #c82333;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
+        }
+
+        .loading-state {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        .loading-state::after {
+            content: "...";
+            animation: loading-dots 1.5s infinite;
+        }
+
+        @keyframes loading-dots {
+            0%, 20% { content: ""; }
+            40% { content: "."; }
+            60% { content: ".."; }
+            80%, 100% { content: "..."; }
+        }
+
+
+        /* Stats Cards */
+        .stats-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin: 30px 20px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 30px 25px;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(102, 126, 234, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.2);
+        }
+
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: #667eea;
+            margin: 15px 0;
+            text-shadow: 0 2px 4px rgba(102, 126, 234, 0.1);
+        }
+
+        .stat-label {
+            color: #555;
+            font-size: 1em;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Dark Mode Styles */
+        .dark-mode {
+            background-color: #1a1a1a;
+            color: #ffffff;
+        }
+
+        .dark-mode .user-profile-section {
+            background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        }
+
+        .dark-mode .stat-card {
+            background: #2d2d2d;
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .dark-mode .stat-card::before {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .dark-mode .stat-label {
+            color: #cccccc;
+        }
+
+        .dark-mode .stat-number {
+            color: #667eea;
+        }
+
+        .dark-mode .Nav-bar {
+            background: linear-gradient(135deg, rgba(26,26,46,0.95) 0%, rgba(22,33,62,0.95) 100%);
+            backdrop-filter: blur(15px);
+        }
+
+        .dark-mode footer {
+            background: #2d2d2d;
+            color: #ffffff;
+        }
+
+        .dark-mode .welcome-section p {
+            color: #cccccc;
+        }
+
+        /* Welcome Message */
+        .welcome-section {
+            text-align: center;
+            margin: 50px 20px 40px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .welcome-section h1 {
+            font-size: 2.8em;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+            text-shadow: 0 4px 8px rgba(102, 126, 234, 0.1);
+        }
+
+        .welcome-section p {
+            font-size: 1.3em;
+            color: #666;
+            line-height: 1.6;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .dark-mode .welcome-section p {
+            color: #cccccc;
+        }
+
+        /* Loading states */
+        .loading {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+
+        .skeleton {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .user-profile-section {
+                margin: 110px 15px 25px;
+                padding: 25px;
+            }
+            
+            .stats-section {
+                grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+                gap: 20px;
+                margin: 25px 15px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .user-profile-section {
+                margin: 100px 10px 20px;
+                padding: 20px;
+            }
+
+            .user-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+
+            .user-actions {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .user-avatar {
+                width: 70px;
+                height: 70px;
+                font-size: 24px;
+            }
+
+            .user-details h3 {
+                font-size: 1.6em;
+            }
+
+            .stats-section {
+                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+                gap: 15px;
+                margin: 20px 10px;
+            }
+
+            .stat-card {
+                padding: 25px 20px;
+            }
+
+            .stat-number {
+                font-size: 2.2em;
+            }
+
+            .welcome-section {
+                margin: 40px 15px 30px;
+            }
+
+            .welcome-section h1 {
+                font-size: 1.8em;
+            }
+
+            .theme-toggle, .logout-btn, .clear-data-btn {
+                padding: 8px 15px;
+                font-size: 0.9em;
+                min-width: 120px;
+                flex: 1;
+                max-width: 150px;
+            }
+
+            .clear-data-btn {
+                background: #dc3545;
+                border: 2px solid #dc3545;
+            }
+
+            .stat-card {
+                padding: 20px 15px;
+            }
+
+            .welcome-section h1 {
+                font-size: 1.8em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .user-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .theme-toggle, .logout-btn, .clear-data-btn {
+                width: 100%;
+                max-width: 200px;
+                margin-bottom: 8px;
+            }
+
+            .user-profile-section {
+                margin: 80px 10px 15px;
+                padding: 15px;
+            }
+        }
+
+        /* BMI Calculator Section */
+        .bmi-calculator-section {
+            margin: 40px 20px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            display: block !important;
+            visibility: visible !important;
+        }
+
+        .bmi-calculator-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.15);
+            border: 1px solid rgba(102, 126, 234, 0.1);
+            text-align: center;
+            display: block !important;
+            visibility: visible !important;
+        }
+
+        .bmi-calculator-card h2 {
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+
+        .bmi-calculator-card p {
+            color: #666;
+            font-size: 1.1em;
+            margin-bottom: 30px;
+        }
+
+        .bmi-input-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .input-field label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+            font-size: 1em;
+        }
+
+        .input-field input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .input-field input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .calculate-bmi-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            color: white;
+            padding: 15px 40px;
+            border-radius: 25px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+        }
+
+        .calculate-bmi-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .bmi-result {
+            background: linear-gradient(135deg, #f8f9ff 0%, #e8f2ff 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            border: 2px solid rgba(102, 126, 234, 0.1);
+        }
+
+        .bmi-value {
+            display: flex;
+            align-items: baseline;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .bmi-number {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .bmi-unit {
+            font-size: 1.2em;
+            color: #666;
+            font-weight: 600;
+        }
+
+        .bmi-category {
+            font-size: 1.4em;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .bmi-description {
+            color: #666;
+            font-size: 1em;
+            line-height: 1.5;
+        }
+
+        .save-bmi-btn {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            border: none;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 20px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+        }
+
+        .save-bmi-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(40, 167, 69, 0.3);
+        }
+
+        .bmi-categories h3 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.3em;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .category-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+            text-align: left;
+        }
+
+        .category-range {
+            display: block;
+            font-weight: 700;
+            color: #667eea;
+            font-size: 1.1em;
+            margin-bottom: 5px;
+        }
+
+        .category-name {
+            color: #555;
+            font-size: 1em;
+        }
+
+        /* Unit Toggle Styles */
+        .unit-toggle {
+            display: flex;
+            background: #f8f9fa;
+            border-radius: 25px;
+            padding: 4px;
+            margin-bottom: 25px;
+            border: 2px solid rgba(102, 126, 234, 0.1);
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .unit-btn {
+            background: transparent;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #666;
+            flex: 1;
+            min-width: 100px;
+        }
+
+        .unit-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .unit-btn:hover {
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+        }
+
+        .unit-btn.active:hover {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        /* Height Input Group for Imperial */
+        .height-input-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .height-input-group input {
+            flex: 1;
+        }
+
+        .unit-text {
+            font-size: 0.9em;
+            color: #666;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        /* Dark mode for BMI calculator */
+        .dark-mode .bmi-calculator-card {
+            background: #2d2d2d;
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .dark-mode .bmi-calculator-card p {
+            color: #cccccc;
+        }
+
+        .dark-mode .input-field label {
+            color: #ffffff;
+        }
+
+        .dark-mode .input-field input {
+            background: #3d3d3d;
+            border-color: #555;
+            color: #ffffff;
+        }
+
+        .dark-mode .bmi-result {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .dark-mode .category-item {
+            background: #3d3d3d;
+            color: #ffffff;
+        }
+
+        .dark-mode .category-name {
+            color: #cccccc;
+        }
+
+        .dark-mode .unit-toggle {
+            background: #3d3d3d;
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .dark-mode .unit-btn {
+            color: #cccccc;
+        }
+
+        .dark-mode .unit-btn:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+        }
+
+        .dark-mode .unit-text {
+            color: #cccccc;
+        }
+
+        .bmi-underweight { color: #17a2b8; }
+        .bmi-normal { color: #28a745; }
+        .bmi-overweight { color: #ffc107; }
+        .bmi-obese { color: #dc3545; }
+
+        .dark-mode .bmi-underweight { color: #17a2b8; }
+        .dark-mode .bmi-normal { color: #28a745; }
+        .dark-mode .bmi-overweight { color: #ffc107; }
+        .dark-mode .bmi-obese { color: #dc3545; }
+
+        /* Responsive BMI calculator */
+        @media (max-width: 768px) {
+            .bmi-calculator-section {
+                margin: 30px 15px;
+            }
+
+            .bmi-calculator-card {
+                padding: 30px 20px;
+            }
+
+            .bmi-calculator-card h2 {
+                font-size: 1.8em;
+            }
+
+            .bmi-input-group {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .calculate-bmi-btn {
+                padding: 12px 30px;
+                font-size: 1em;
+            }
+
+            .bmi-number {
+                font-size: 2em;
+            }
+
+            .category-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <div class="Nav-bar">   
+        <nav>
+            <h2 id="logo"><span>FITNESS GUIDE</span></h2>
+            <ul>
+                <li><a href="main.html">Main</a></li>
+                <li><a href="Home.html" class="active">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li> 
+                <li><a href="Help.html">Help</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- User Profile Section -->
+    <div class="user-profile-section" id="userProfileSection">
+        <div class="user-header">
+            <div class="user-info">
+                <div class="user-avatar" id="userAvatar">
+                    <span id="userInitials">U</span>
+                </div>
+                <div class="user-details">
+                    <h3 id="userName">Loading...</h3>
+                    <p id="userEmail">Loading...</p>
+                    <p id="memberSince">Member since: Loading...</p>
+                </div>
+            </div>
+            <div class="user-actions">
+                <button class="theme-toggle" id="refreshStats" style="background: rgba(40, 167, 69, 0.2);">
+                    <span id="themeIcon">🌙</span>
+                    <span id="themeText">Dark Mode</span>
+                </button>
+                <button class="logout-btn" id="logoutBtn">
+                     Logout
+                </button>
+                <button class="clear-data-btn" id="clearDataBtn" title="Permanently delete all your data">
+                    Clear Data
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Welcome Section -->
+    <div class="welcome-section">
+        <h1 id="welcomeTitle">User Settings & Profile</h1>
+        <p id="welcomeMessage">Manage your account settings, view your fitness statistics, and customize your experience.</p>
+    </div>
+
+    <!-- Stats Section -->
+    <div class="stats-section" id="statsSection">
+        <div class="stat-card">
+            <div class="stat-number" id="totalWorkouts">-</div>
+            <div class="stat-label">Total Workouts</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number" id="totalDuration">-</div>
+            <div class="stat-label">Time Exercised</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number" id="currentBMI">-</div>
+            <div class="stat-label">Current BMI</div>
+        </div>
+    </div>
+
+
+    <!-- BMI Calculator Section -->
+    <div class="bmi-calculator-section">
+        <div class="bmi-calculator-card">
+            <h2>BMI Calculator</h2>
+            <p>Calculate your Body Mass Index and get personalized health insights</p>
+
+            <!-- Unit Toggle -->
+            <div class="unit-toggle">
+                <button class="unit-btn active" id="metricBtn">Metric</button>
+                <button class="unit-btn" id="mixedBtn">Mixed</button>
+                <button class="unit-btn" id="imperialBtn">Imperial</button>
+            </div>
+
+            <div class="bmi-input-group">
+                <div class="input-field">
+                    <label for="height">Height (cm)</label>
+                    <div class="height-input-group">
+                        <input type="number" id="height" placeholder="170" min="50" max="250" step="0.1">
+                        <input type="number" id="heightFeet" placeholder="5" min="1" max="8" step="1" style="display: none;">
+                        <span class="unit-text" id="heightUnit">cm</span>
+                        <input type="number" id="heightInches" placeholder="8" min="0" max="11" step="0.1" style="display: none;">
+                    </div>
+                </div>
+                <div class="input-field">
+                    <label for="weight">Weight (kg)</label>
+                    <input type="number" id="weight" placeholder="70" min="20" max="300" step="0.1">
+                    <span class="unit-text" id="weightUnit">kg</span>
+                </div>
+            </div>
+
+            <button class="calculate-bmi-btn" id="calculateBMI">
+                <span>Calculate BMI</span>
+            </button>
+
+            <div class="bmi-result" id="bmiResult" style="display: none;">
+                <div class="bmi-value">
+                    <span class="bmi-number" id="bmiValue">-</span>
+                    <span class="bmi-unit">BMI</span>
+                </div>
+                <div class="bmi-category" id="bmiCategory">-</div>
+                <div class="bmi-description" id="bmiDescription">-</div>
+            </div>
+
+            <button class="save-bmi-btn" id="saveBMI" style="display: none;">
+                <span>Save to Profile</span>
+            </button>
+
+            <div class="bmi-categories">
+                <h3>BMI Categories</h3>
+                <div class="category-grid">
+                    <div class="category-item">
+                        <span class="category-range">Under 18.5</span>
+                        <span class="category-name">Underweight</span>
+                    </div>
+                    <div class="category-item">
+                        <span class="category-range">18.5 - 24.9</span>
+                        <span class="category-name">Normal</span>
+                    </div>
+                    <div class="category-item">
+                        <span class="category-range">25 - 29.9</span>
+                        <span class="category-name">Overweight</span>
+                    </div>
+                    <div class="category-item">
+                        <span class="category-range">30+</span>
+                        <span class="category-name">Obese</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2025 FITNESS GUIDE. All Rights Reserved.</p>
+    </footer>
+    <script src="assets/js/theme-manager.js" defer></script>
+    <script src="assets/js/script.js" defer></script>
+
+    <script>
+        // Listen for workout completion events
+        window.addEventListener('workoutCompleted', function(event) {
+            console.log('🎉 Workout completed event received:', event.detail);
+            // Refresh stats after a short delay
+            setTimeout(() => {
+                loadWorkoutStatsFromStorage();
+            }, 1000);
+        });
+
+        // Check for workout completion flag on page load
+        if (localStorage.getItem('workoutCompleted') === 'true') {
+            console.log('🔄 Workout completion detected, refreshing stats');
+            localStorage.removeItem('workoutCompleted');
+            setTimeout(() => {
+                loadWorkoutStatsFromStorage();
+            }, 500);
+        }
+
+        // Initialize everything when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user is logged in
+            const token = localStorage.getItem('token');
+            const user = JSON.parse(localStorage.getItem('user') || '{}');
+
+            if (!token) {
+                // Redirect to login if not authenticated
+                console.log('No token found, redirecting to login...');
+                alert('Please login to access your profile and settings.');
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // Load user data first (will show cached data immediately)
+            loadUserData();
+            loadUserStats();
+            // Attempt silent sync of BMI to DB if DB values missing but local BMI exists
+            syncBMIToDatabaseIfMissing();
+            
+            // Test authentication in background (don't block page load)
+            testAuthentication();
+
+            // Setup modern event-driven refresh system
+            setupSmartRefresh();
+
+            // Theme toggle functionality - Simplified for Home page
+            const themeToggle = document.getElementById('themeToggle');
+            const themeIcon = document.getElementById('themeIcon');
+            const themeText = document.getElementById('themeText');
+
+            // Wait for theme manager to be available
+            function initializeThemeToggle() {
+                if (window.themeManager) {
+                    console.log('✅ Theme manager loaded, setting up theme toggle');
+
+                    // Load saved theme and update button appearance
+                    const savedTheme = localStorage.getItem('theme') || 'light';
+                    if (savedTheme === 'dark') {
+                        document.body.classList.add('dark-mode');
+                    }
+
+                    // The theme manager will handle the button setup automatically
+                    // But we'll also add our own handler for immediate response
+                    if (themeToggle) {
+                        themeToggle.addEventListener('click', function() {
+                            console.log('🎨 Theme toggle clicked');
+                            if (window.themeManager) {
+                                window.themeManager.toggleTheme();
+                            }
+                        });
+                    }
+                } else {
+                    // Fallback if theme manager isn't available yet
+                    console.log('⏳ Theme manager not loaded yet, retrying...');
+                    setTimeout(initializeThemeToggle, 100);
+                }
+            }
+
+            // Initialize theme toggle
+            initializeThemeToggle();
+
+            // Refresh stats functionality
+            document.getElementById('refreshStats').addEventListener('click', function() {
+                console.log('🔄 Manual refresh triggered');
+                // Clear any cached data
+                localStorage.removeItem('workoutCompleted');
+                // Force reload stats
+                showLoadingStats();
+                setTimeout(() => {
+                    loadUserStats();
+                }, 100);
+            });
+
+            // Logout functionality
+            document.getElementById('logoutBtn').addEventListener('click', function() {
+                if (confirm('Are you sure you want to logout?')) {
+                    clearUserData();
+                    window.location.href = 'login.html';
+                }
+            });
+
+            // Clear all data functionality
+            document.getElementById('clearDataBtn').addEventListener('click', async function() {
+                await clearAllUserData();
+            });
+
+            // BMI Calculator is initialized by bmi-calculator.js
+        });
+
+        async function testAuthentication() {
+            const token = localStorage.getItem('token');
+            
+            if (!token) {
+                console.log('No token available for authentication test');
+                return;
+            }
+            
+            try {
+                console.log('Testing authentication...');
+                const response = await fetch('http://localhost:3000/api/workouts/test', {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log('Authentication test successful');
+                } else {
+                    console.warn('Authentication test failed:', response.status, response.statusText);
+                    
+                    // Only redirect if explicitly unauthorized (not on server errors or other issues)
+                    if (response.status === 401 || response.status === 403) {
+                        const errorText = await response.text();
+                        console.warn('Error response:', errorText);
+                        console.log('Token is invalid, clearing storage');
+                        clearUserData();
+                        // Redirect to login
+                        alert('Your session has expired. Please login again.');
+                        window.location.href = 'login.html';
+                    } else {
+                        // For other errors (500, 404, etc.), just log but don't redirect
+                        console.warn('API error but not authentication related, continuing...');
+                    }
+                }
+            } catch (error) {
+                console.error('Authentication test network error:', error);
+                // Don't redirect on network errors (server might be down), just log them
+                console.log('Continuing with cached user data...');
+            }
+        }
+
+        async function loadUserData() {
+            const user = JSON.parse(localStorage.getItem('user') || '{}');
+            const token = localStorage.getItem('token');
+
+            try {
+                // Update basic user info from localStorage immediately
+                const userName = user.name || 'Guest User';
+                const userEmail = user.email || 'guest@fitness-guide.com';
+                
+                document.getElementById('userName').textContent = userName;
+                document.getElementById('userEmail').textContent = userEmail;
+                
+                // Generate user initials for avatar
+                const initials = userName.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2);
+                document.getElementById('userInitials').textContent = initials;
+
+                // Fetch additional user profile data
+                const response = await fetch('http://localhost:3000/api/auth/profile', {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    const createdAt = new Date(data.user.created_at);
+                    document.getElementById('memberSince').textContent = 
+                        `Member since: ${createdAt.toLocaleDateString()}`;
+                    // Cache whether DB already has profile values present
+                    try {
+                        const hasProfileValues = !!(data.profile && ((data.profile.height && Number(data.profile.height) > 0) || (data.profile.weight && Number(data.profile.weight) > 0) || (data.profile.bmi && Number(data.profile.bmi) > 0)));
+                        localStorage.setItem('hasDbProfileValues', hasProfileValues ? 'true' : 'false');
+                    } catch (e) { /* ignore */ }
+                } else {
+                    document.getElementById('memberSince').textContent = 'Member since: Recently';
+                }
+            } catch (error) {
+                console.error('Error loading user data:', error);
+                document.getElementById('memberSince').textContent = 'Member since: Recently';
+            }
+        }
+
+        // Silently sync BMI/height/weight to DB when missing there but available locally
+        async function syncBMIToDatabaseIfMissing() {
+            try {
+                const token = localStorage.getItem('token');
+                if (!token) return;
+                const userId = getCurrentUserId();
+                if (!userId) return;
+
+                // Avoid repeated syncs in this session
+                const syncFlagKey = `bmiSyncDone_user_${userId}`;
+                if (localStorage.getItem(syncFlagKey) === 'true') return;
+
+                // If we already detected DB has values, skip
+                if (localStorage.getItem('hasDbProfileValues') === 'true') return;
+
+                const localKey = getUserSpecificKey('userBMIProfile');
+                const savedProfileRaw = localStorage.getItem(localKey);
+                if (!savedProfileRaw) return;
+
+                const savedProfile = JSON.parse(savedProfileRaw);
+                const h = Number(savedProfile.height) || 0;
+                const w = Number(savedProfile.weight) || 0;
+                const b = Number(savedProfile.bmi) || 0;
+                if (h <= 0 || w <= 0 || b <= 0) return;
+
+                // Push to DB
+                const resp = await fetch('http://localhost:3000/api/auth/profile', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ height: h, weight: w, bmi: b })
+                });
+                if (resp.ok) {
+                    localStorage.setItem(syncFlagKey, 'true');
+                    localStorage.setItem('hasDbProfileValues', 'true');
+                    console.log('✅ Synced BMI/height/weight to database');
+                }
+            } catch (e) {
+                console.warn('BMI sync skipped:', e);
+            }
+        }
+
+        function animateValue(elementId, start, end, duration) {
+            const element = document.getElementById(elementId);
+            if (!element) return;
+            
+            const range = end - start;
+            const startTime = performance.now();
+            
+            function updateValue(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                
+                // Easing function for smooth animation
+                const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+                const current = Math.round(start + (range * easeOutQuart));
+                
+                element.textContent = current;
+                
+                if (progress < 1) {
+                    requestAnimationFrame(updateValue);
+                }
+            }
+            
+            requestAnimationFrame(updateValue);
+        }
+
+        function formatDuration(totalSeconds) {
+            if (totalSeconds >= 3600) {
+                // Hours, minutes, seconds format
+                const hours = Math.floor(totalSeconds / 3600);
+                const minutes = Math.floor((totalSeconds % 3600) / 60);
+                const seconds = totalSeconds % 60;
+                
+                if (seconds > 0) {
+                    return `${hours}h ${minutes}m ${seconds}s`;
+                } else if (minutes > 0) {
+                    return `${hours}h ${minutes}m`;
+                } else {
+                    return `${hours}h`;
+                }
+            } else if (totalSeconds >= 60) {
+                // Minutes and seconds format
+                const minutes = Math.floor(totalSeconds / 60);
+                const seconds = totalSeconds % 60;
+                
+                if (seconds > 0) {
+                    return `${minutes}m ${seconds}s`;
+                } else {
+                    return `${minutes}m`;
+                }
+            } else {
+                // Seconds only
+                return totalSeconds > 0 ? `${totalSeconds}s` : '0s';
+            }
+        }
+
+        function loadWorkoutStatsFromStorage() {
+            try {
+                console.log('📊 Loading workout stats from localStorage...');
+                
+                const userId = getCurrentUserId();
+                if (!userId) {
+                    console.log('⚠️ No user logged in, showing default stats');
+                    setDefaultWorkoutStats();
+                    return;
+                }
+                
+                // Use the new workout data manager functions
+                const workoutStats = getUserWorkoutStats();
+                const workoutHistory = getUserWorkoutHistory();
+                
+                console.log('📈 Found workout stats:', workoutStats);
+                console.log('📋 Found workout history:', workoutHistory.length, 'workouts');
+                
+                // Update total workouts
+                const totalWorkouts = workoutStats.totalWorkouts || workoutHistory.length || 0;
+                
+                // Format duration with hours, minutes, and seconds
+                let totalDurationFormatted = '';
+                let totalDurationSeconds = 0;
+                
+                if (workoutStats.totalDurationSeconds) {
+                    totalDurationSeconds = workoutStats.totalDurationSeconds;
+                    console.log(`Using accurate duration: ${totalDurationSeconds} seconds`);
+                } else if (workoutStats.totalDuration) {
+                    // Convert minutes to seconds
+                    totalDurationSeconds = workoutStats.totalDuration * 60;
+                    console.log(`Using legacy duration: ${workoutStats.totalDuration} minutes = ${totalDurationSeconds} seconds`);
+                } else {
+                    totalDurationSeconds = 0;
+                    console.log('No duration data found');
+                }
+                
+                // Format duration using utility function
+                totalDurationFormatted = formatDuration(totalDurationSeconds);
+                
+                console.log(`Formatted duration: ${totalDurationFormatted}`);
+                
+                // Calculate total calories (estimate: 5 calories per minute)
+                const totalCalories = Math.round(totalDurationSeconds / 60) * 5;
+                
+                console.log(`Stats: ${totalWorkouts} workouts, ${totalDurationFormatted}`);
+                
+                // Update the display with animation for workout count only
+                animateValue('totalWorkouts', 0, totalWorkouts, 1000);
+                
+                // Update duration display with formatted text (no animation for text)
+                const durationElement = document.getElementById('totalDuration');
+                if (durationElement) {
+                    durationElement.textContent = totalDurationFormatted;
+                    console.log(`✅ Duration display updated: ${totalDurationFormatted}`);
+                }
+                
+                // Update calories if element exists
+                const caloriesElement = document.getElementById('totalCalories');
+                if (caloriesElement) {
+                    animateValue('totalCalories', 0, totalCalories, 1000);
+                }
+                
+                console.log('✅ Workout stats updated successfully');
+                
+            } catch (error) {
+                console.error('❌ Error loading workout stats from storage:', error);
+            }
+        }
+
+        async function loadUserStats() {
+            const token = localStorage.getItem('token');
+            
+            // Always try to load from localStorage first
+            loadWorkoutStatsFromStorage();
+            
+            if (!token) {
+                console.log('No token available, using localStorage data only');
+                return;
+            }
+            
+            // Show loading state
+            showLoadingStats();
+            
+            try {
+                console.log('Loading user stats...');
+                
+                // Load workout stats
+                try {
+                    const workoutResponse = await fetch('http://localhost:3000/api/workouts/stats?period=365', {
+                        headers: {
+                            'Authorization': `Bearer ${token}`,
+                            'Content-Type': 'application/json'
+                        }
+                    });
+
+                    if (workoutResponse.ok) {
+                        const workoutData = await workoutResponse.json();
+                        console.log('📊 Workout stats loaded from API:', workoutData);
+                        
+                        // Update workout statistics with proper formatting
+                        const totalWorkouts = Number(workoutData.totalWorkouts) || 0;
+                        let totalDurationSeconds = Number(workoutData.totalDuration) || 0;
+                        
+                        // Convert to seconds if it's in minutes
+                        if (totalDurationSeconds < 1000) {
+                            // Likely in minutes, convert to seconds
+                            totalDurationSeconds = totalDurationSeconds * 60;
+                        }
+                        
+                        // Format duration using utility function
+                        const totalDurationFormatted = formatDuration(totalDurationSeconds);
+                        
+                        console.log(`API Stats: ${totalWorkouts} workouts, ${totalDurationFormatted}`);
+                        
+                        animateNumber('totalWorkouts', totalWorkouts);
+                        
+                        // Update duration display with formatted text
+                        const durationElement = document.getElementById('totalDuration');
+                        if (durationElement) {
+                            durationElement.textContent = totalDurationFormatted;
+                        }
+                        
+                        // Save to localStorage for persistence
+                        const userId = getCurrentUserId();
+                        if (userId) {
+                            const userStatsKey = `workoutStats_user_${userId}`;
+                            const statsToSave = {
+                                totalWorkouts: totalWorkouts,
+                                totalDuration: Math.round(totalDurationSeconds / 60), // Save as minutes for compatibility
+                                totalDurationSeconds: totalDurationSeconds,
+                                lastUpdated: new Date().toISOString()
+                            };
+                            localStorage.setItem(userStatsKey, JSON.stringify(statsToSave));
+                            console.log('💾 API stats saved to localStorage for persistence');
+                        }
+                        
+                        // Mark when stats were last updated
+                        localStorage.setItem('lastStatsUpdate', Date.now().toString());
+                        console.log('✅ Workout stats updated successfully from API');
+                    } else {
+                        console.warn('Workout stats API failed:', workoutResponse.status, '- using localStorage data');
+                        // Don't call setDefaultWorkoutStats() - keep existing localStorage data
+                    }
+                } catch (workoutError) {
+                    console.error('Error fetching workout stats (server likely not running):', workoutError);
+                    console.log('📱 Using localStorage data instead of clearing');
+                    // Don't call setDefaultWorkoutStats() - keep existing localStorage data
+                }
+
+                // Load fitness report for BMI
+                try {
+                    const reportResponse = await fetch('http://localhost:3000/api/reports/fitness-report?period=365', {
+                        headers: {
+                            'Authorization': `Bearer ${token}`,
+                            'Content-Type': 'application/json'
+                        }
+                    });
+
+                    if (reportResponse.ok) {
+                        const reportData = await reportResponse.json();
+                        console.log('BMI data loaded successfully');
+                        
+                        // Extract BMI with proper fallbacks
+                        let bmi = 0;
+                        if (reportData && reportData.profile && typeof reportData.profile.bmi === 'number') {
+                            bmi = reportData.profile.bmi;
+                        }
+                        
+                        const bmiElement = document.getElementById('currentBMI');
+                        if (bmi > 0) {
+                            animateNumber('currentBMI', bmi, 1); // 1 decimal place
+                            console.log('BMI updated from API successfully:', bmi);
+                        } else {
+                            // Try to load BMI from localStorage if API doesn't have it
+                            loadBMIFromLocalStorage();
+                        }
+                        
+                    } else {
+                        console.warn('Fitness report API failed:', reportResponse.status);
+                        // Try to load BMI from localStorage when API fails
+                        loadBMIFromLocalStorage();
+                    }
+                } catch (reportError) {
+                    console.error('Error fetching fitness report:', reportError);
+                    // Try to load BMI from localStorage when API fails
+                    loadBMIFromLocalStorage();
+                }
+
+            } catch (error) {
+                console.error('General error loading user stats:', error);
+                setDefaultStats();
+            }
+        }
+
+        function showLoadingStats() {
+            const statElements = ['totalWorkouts', 'totalDuration', 'currentBMI'];
+            // Batch DOM operations with requestAnimationFrame
+            requestAnimationFrame(() => {
+                for (let i = 0; i < statElements.length; i++) {
+                    const element = document.getElementById(statElements[i]);
+                    if (element) {
+                        element.textContent = '...';
+                        element.parentElement.classList.add('loading');
+                    }
+                }
+            });
+        }
+
+        window.animateNumber = function(elementId, targetValue, decimals = 0) {
+            const element = document.getElementById(elementId);
+            element.parentElement.classList.remove('loading');
+            
+            // Get current value to start from
+            const currentText = element.textContent.replace(/,/g, '');
+            const startValue = parseFloat(currentText) || 0;
+            const duration = 1000; // 1 second
+            const startTime = performance.now();
+            
+            console.log(`🎬 Animating ${elementId}: ${startValue} → ${targetValue}`);
+            
+            function updateNumber(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                
+                // Easing function for smooth animation
+                const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+                const currentValue = startValue + (targetValue - startValue) * easeOutQuart;
+                
+                if (decimals > 0) {
+                    element.textContent = currentValue.toFixed(decimals);
+                } else {
+                    element.textContent = Math.floor(currentValue).toLocaleString();
+                }
+                
+                if (progress < 1) {
+                    requestAnimationFrame(updateNumber);
+                } else {
+                    console.log(`✅ Animation complete for ${elementId}: ${targetValue}`);
+                }
+            }
+            
+            requestAnimationFrame(updateNumber);
+        }
+
+        function setDefaultStats() {
+            setDefaultWorkoutStats();
+            // Try to load BMI from localStorage even when setting defaults
+            loadBMIFromLocalStorage();
+        }
+
+        function setDefaultWorkoutStats() {
+            document.getElementById('totalWorkouts').textContent = '0';
+            document.getElementById('totalDuration').textContent = '0';
+        }
+
+        function getCurrentUserId() {
+            try {
+                const user = localStorage.getItem('user');
+                if (user) {
+                    const userData = JSON.parse(user);
+                    return userData.id || null;
+                }
+            } catch (error) {
+                console.error('Error getting current user ID:', error);
+            }
+            return null;
+        }
+
+        function getUserSpecificKey(baseKey) {
+            const userId = getCurrentUserId();
+            return userId ? `${baseKey}_user_${userId}` : baseKey;
+        }
+
+        function loadBMIFromLocalStorage() {
+            try {
+                const userId = getCurrentUserId();
+                const bmiElement = document.getElementById('currentBMI');
+                
+                if (!userId) {
+                    console.log('⚠️ No user logged in, cannot load BMI from localStorage');
+                    bmiElement.textContent = 'N/A';
+                    return;
+                }
+
+                const userSpecificKey = getUserSpecificKey('userBMIProfile');
+                const savedBMIProfile = localStorage.getItem(userSpecificKey);
+                
+                if (savedBMIProfile) {
+                    const profile = JSON.parse(savedBMIProfile);
+                    
+                    // Verify this BMI data belongs to the current user
+                    if (profile.userId && profile.userId !== userId) {
+                        console.warn('⚠️ BMI data belongs to different user, ignoring');
+                        bmiElement.textContent = 'N/A';
+                        return;
+                    }
+                    
+                    if (profile.bmi && typeof profile.bmi === 'number' && profile.bmi > 0) {
+                        animateNumber('currentBMI', profile.bmi, 1); // 1 decimal place
+                        console.log('✅ BMI loaded from localStorage for user', userId, ':', profile.bmi);
+                        
+                        // Show when this BMI was saved
+                        if (profile.savedAt) {
+                            const savedDate = new Date(profile.savedAt);
+                            console.log(`📅 BMI was saved on: ${savedDate.toLocaleDateString()}`);
+                        }
+                        return;
+                    }
+                }
+                
+                // If no valid BMI found in localStorage, show N/A
+                console.log('ℹ No valid BMI found in localStorage for user', userId);
+                bmiElement.textContent = 'N/A';
+                
+            } catch (error) {
+                console.error('❌ Error loading BMI from localStorage:', error);
+                document.getElementById('currentBMI').textContent = 'N/A';
+            }
+        }
+
+        // Modern event-driven refresh system (no continuous polling)
+        function setupSmartRefresh() {
+            // Check if a workout was just completed
+            const workoutCompleted = localStorage.getItem('workoutCompleted');
+            if (workoutCompleted === 'true') {
+                console.log('🏃 Workout completed detected - refreshing stats');
+                localStorage.removeItem('workoutCompleted');
+                showLoadingStats();
+                setTimeout(() => {
+                    loadUserStats();
+                }, 300);
+            }
+
+            // Listen for focus events (when user returns to tab)
+            window.addEventListener('focus', function() {
+                const lastUpdate = localStorage.getItem('lastStatsUpdate');
+                const now = Date.now();
+                
+                // Only refresh if it's been more than 30 seconds since last update
+                if (!lastUpdate || (now - parseInt(lastUpdate)) > 30000) {
+                    console.log('Page focused - refreshing stats (throttled)');
+                    loadUserStats();
+                }
+            });
+
+            // Listen for storage changes (workout completed in another tab/window)
+            window.addEventListener('storage', function(e) {
+                if (e.key === 'workoutCompleted' && e.newValue === 'true') {
+                    console.log('🏃 Workout completed detected via storage event');
+                    showLoadingStats();
+                    setTimeout(() => {
+                        loadUserStats();
+                        localStorage.removeItem('workoutCompleted');
+                    }, 500);
+                }
+            });
+
+            // Custom event listener for workout completion
+            window.addEventListener('workoutCompleted', function(e) {
+                console.log('🏃 Workout completed via custom event');
+                showLoadingStats();
+                setTimeout(() => {
+                    loadUserStats();
+                }, 300);
+            });
+
+            // Custom event listener for BMI save
+            window.addEventListener('bmiSaved', function(e) {
+                console.log('💾 BMI saved via custom event:', e.detail);
+                const bmi = e.detail.bmi;
+                if (bmi && typeof bmi === 'number' && bmi > 0) {
+                    animateNumber('currentBMI', bmi, 1);
+                    console.log('🔄 Updated current BMI display after save:', bmi);
+                }
+            });
+        }
+
+        function clearUserData() {
+            console.log('🧹 Clearing authentication data from localStorage');
+            
+            // Only remove authentication data, NOT user data
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            
+            // Remove temporary flags only
+            localStorage.removeItem('workoutCompleted');
+            localStorage.removeItem('lastStatsUpdate');
+            
+            // Keep theme preference, BMI data, and workout data when logging out
+            console.log('✅ Authentication data cleared successfully (user data preserved)');
+        }
+
+        function clearAllUserData() {
+            return new Promise((resolve) => {
+                const confirmMessage = `⚠️ WARNING: This will permanently delete ALL your data including:\n\n• All workout history and statistics\n• BMI data and calculations\n• Progress tracking\n• Personal records\n\nThis action CANNOT be undone!\n\nType 'DELETE' to confirm:`;
+                
+                const confirmation = prompt(confirmMessage);
+                
+                if (confirmation === 'DELETE') {
+                    console.log('🧹 Clearing ALL user data from localStorage');
+                    
+                    const userId = getCurrentUserId();
+                    
+                    // Remove authentication data
+                    localStorage.removeItem('token');
+                    localStorage.removeItem('user');
+                    
+                    // Remove user-specific BMI data
+                    if (userId) {
+                        const userBMIProfileKey = `userBMIProfile_user_${userId}`;
+                        const userBMIHistoryKey = `userBMIHistory_user_${userId}`;
+                        
+                        localStorage.removeItem(userBMIProfileKey);
+                        localStorage.removeItem(userBMIHistoryKey);
+                        
+                        console.log('✅ Cleared BMI data for user', userId);
+                    }
+                    
+                    // Remove user-specific workout data
+                    if (userId) {
+                        localStorage.removeItem(`workoutStats_user_${userId}`);
+                        localStorage.removeItem(`workoutHistory_user_${userId}`);
+                    }
+                    
+                    // Remove legacy workout data
+                    localStorage.removeItem('workoutHistory');
+                    localStorage.removeItem('workoutStats');
+                    
+                    // Remove legacy BMI data
+                    localStorage.removeItem('userBMIProfile');
+                    localStorage.removeItem('userBMIHistory');
+                    
+                    // Remove temporary flags
+                    localStorage.removeItem('workoutCompleted');
+                    localStorage.removeItem('lastStatsUpdate');
+                    
+                    // Keep theme preference
+                    alert('✅ All user data has been permanently deleted!');
+                    console.log('✅ All user data cleared successfully');
+                    
+                    // Refresh the page to show empty state
+                    window.location.reload();
+                    resolve(true);
+                } else {
+                    console.log('❌ Data clearing cancelled by user');
+                    alert('❌ Data clearing cancelled');
+                    resolve(false);
+                }
+            });
+        }
+
+    </script>
+
+    <script src="assets/js/workout-data-manager.js"></script>
+    <script src="bmi-calculator.js"></script>
+</body>
+</html>

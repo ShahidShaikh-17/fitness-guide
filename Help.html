@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help - Fitness Guidance</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/sections.css">
+
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <div class="Nav-bar">   
+        <nav>
+            <h2 id="logo"><span>FITNESS GUIDE</span></h2>
+            <ul>
+                <li><a href="main.html">Main</a></li>
+                <li><a href="Home.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li> 
+                <li><a href="Help.html" class="active">Help</a></li> 
+                <li><button class="theme-toggle-nav" id="themeToggleNav">
+                    <span id="themeIconNav">🌙</span>
+                </button></li>
+            </ul>
+        </nav>
+    </div>
+
+    <section class="help-section">
+        <div class="container">
+            <h1>Help & Support</h1>
+            <p>Need assistance? Check out our frequently asked questions or contact our support team.</p>
+
+            <div class="faq">
+                <h2>Frequently Asked Questions</h2>
+
+                <div class="faq-item">
+                    <h3>How do I create a workout plan?</h3>
+                    <p>You can create a personalized workout plan by selecting your fitness goals and preferences on our website.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>What diet plan should I follow?</h3>
+                    <p>We offer customized diet plans based on your body type and fitness objectives. Check out our Nutrition section for more details.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>Do you recommend fitness products?</h3>
+                    <p>Yes! We provide expert reviews and recommendations for the best fitness gear, supplements, and equipment.</p>
+                </div>
+            </div>
+
+            <div class="contact-support">
+                <h2>Still Need Help?</h2>
+                <p>If you have further questions, feel free to <a href="contact.html" >contact us</a>. Our support team is here to assist you.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; <span id="year"></span> FITNESS GUIDE. All Rights Reserved.</p>
+    </footer>
+
+    <script src="assets/js/theme-manager.js" defer></script>
+    <script src="assets/js/script.js" defer></script>
+    <script>
+        document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

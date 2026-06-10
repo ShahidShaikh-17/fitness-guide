@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthy Diet Plans</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/sections.css">
+    <link rel="stylesheet" href="diet-styles.css">
+</head>
+<body>
+    <div class="Nav-bar">
+        <nav>
+            <h2 id="logo"><span>FITNESS GUIDE</span></h2>
+            <ul>
+                <li><a href="../main.html">Main</a></li>
+                <li><a href="../Home.html">Home</a></li>
+                <li><a href="../about.html">About</a></li>
+                <li><a href="../contact.html">Contact</a></li>
+                <li><a href="../Help.html">Help</a></li>
+                <li><button class="theme-toggle-nav" id="themeToggleNav">
+                    <span id="themeIconNav">🌙</span>
+                </button></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Improved Header -->
+    <header>
+        <h1>Healthy Diet Plan</h1>
+        <p>Fuel Your Body with Nutritious & Delicious Meals</p>
+        
+        <!-- Filter Buttons -->
+        <div class="filter-container">
+            <button class="filter-btn active" data-filter="all">All Days</button>
+            <button class="filter-btn" data-filter="protein">High Protein</button>
+            <button class="filter-btn" data-filter="light">Light Meals</button>
+            <button class="filter-btn" data-filter="energy">Energy Boost</button>
+        </div>
+    </header>
+
+    <!-- Diet Plan Cards -->
+    <div class="container">
+        <div class="card" data-category="all">
+            <div class="card-badge">Balanced</div>
+            <div class="card-image-wrapper">
+                <img src="Images/Day 1 Diet.webp" alt="Oatmeal" loading="lazy">
+                <div class="card-overlay">
+                    <button class="favorite-btn" onclick="toggleFavorite(this)">♡</button>
+                </div>
+            </div>
+            <h2>Day 1: Balanced Start</h2>
+            <div class="nutrition-info">
+                <span class="nutrition-badge"><span class="icon-cal"></span> 450 cal</span>
+                <span class="nutrition-badge"><span class="icon-protein"></span> 25g protein</span>
+            </div>
+            <ul>
+                <li><span class="meal-icon breakfast">Breakfast:</span> Oatmeal with banana & nuts</li>
+                <li><span class="meal-icon snack">Snack:</span> Greek yogurt with honey</li>
+                <li><span class="meal-icon dinner">Dinner:</span> Grilled chicken, quinoa, and greens</li>
+            </ul>
+            <button class="view-details-btn" onclick="showDetails(0)">View Full Plan</button>
+        </div>
+        <div class="card" data-category="protein">
+            <div class="card-badge protein-badge">High Protein</div>
+            <div class="card-image-wrapper">
+                <img src="Images/Day 2 Diet.webp" alt="Eggs" loading="lazy">
+                <div class="card-overlay">
+                    <button class="favorite-btn" onclick="toggleFavorite(this)">♡</button>
+                </div>
+            </div>
+            <h2>Day 2: Protein & Fiber Boost</h2>
+            <div class="nutrition-info">
+                <span class="nutrition-badge"><span class="icon-cal"></span> 520 cal</span>
+                <span class="nutrition-badge"><span class="icon-protein"></span> 35g protein</span>
+            </div>
+            <ul>
+                <li><span class="meal-icon breakfast">Breakfast:</span> Scrambled eggs with whole-grain toast</li>
+                <li><span class="meal-icon snack">Snack:</span> Almonds & an apple</li>
+                <li><span class="meal-icon dinner">Dinner:</span> Lentil soup with whole wheat bread</li>
+            </ul>
+            <button class="view-details-btn" onclick="showDetails(1)">View Full Plan</button>
+        </div>
+        <div class="card" data-category="light">
+            <div class="card-badge light-badge">Light & Fresh</div>
+            <div class="card-image-wrapper">
+                <img src="Images/Day 3 Diet.webp" alt="Avocado Toast" loading="lazy">
+                <div class="card-overlay">
+                    <button class="favorite-btn" onclick="toggleFavorite(this)">♡</button>
+                </div>
+            </div>
+            <h2>Day 3: Light & Fresh</h2>
+            <div class="nutrition-info">
+                <span class="nutrition-badge"><span class="icon-cal"></span> 380 cal</span>
+                <span class="nutrition-badge"><span class="icon-protein"></span> 22g protein</span>
+            </div>
+            <ul>
+                <li><span class="meal-icon breakfast">Breakfast:</span> Avocado toast with eggs</li>
+                <li><span class="meal-icon snack">Snack:</span> Mixed berries & nuts</li>
+                <li><span class="meal-icon dinner">Dinner:</span> Grilled salmon with steamed veggies</li>
+            </ul>
+            <button class="view-details-btn" onclick="showDetails(2)">View Full Plan</button>
+        </div>
+        <div class="card" data-category="energy">
+            <div class="card-badge energy-badge">Energy Boost</div>
+            <div class="card-image-wrapper">
+                <img src="Images/Day 4 Diet.webp" alt="Quinoa" loading="lazy">
+                <div class="card-overlay">
+                    <button class="favorite-btn" onclick="toggleFavorite(this)">♡</button>
+                </div>
+            </div>
+            <h2>Day 4: Energy Boost</h2>
+            <div class="nutrition-info">
+                <span class="nutrition-badge"><span class="icon-cal"></span> 480 cal</span>
+                <span class="nutrition-badge"><span class="icon-protein"></span> 28g protein</span>
+            </div>
+            <ul>
+                <li><span class="meal-icon breakfast">Breakfast:</span> Chia pudding with almonds</li>
+                <li><span class="meal-icon snack">Snack:</span> Hummus with whole wheat crackers</li>
+                <li><span class="meal-icon dinner">Dinner:</span> Grilled tofu with quinoa & spinach</li>
+            </ul>
+            <button class="view-details-btn" onclick="showDetails(3)">View Full Plan</button>
+        </div>
+        <div class="card" data-category="protein">
+            <div class="card-badge protein-badge">Heart-Healthy</div>
+            <div class="card-image-wrapper">
+                <img src="Images/Day 5 Diet.webp" alt="Salmon" loading="lazy">
+                <div class="card-overlay">
+                    <button class="favorite-btn" onclick="toggleFavorite(this)">♡</button>
+                </div>
+            </div>
+            <h2>Day 5: Heart-Healthy</h2>
+            <div class="nutrition-info">
+                <span class="nutrition-badge"><span class="icon-cal"></span> 500 cal</span>
+                <span class="nutrition-badge"><span class="icon-protein"></span> 32g protein</span>
+            </div>
+            <ul>
+                <li><span class="meal-icon breakfast">Breakfast:</span> Whole grain pancakes with berries</li>
+                <li><span class="meal-icon snack">Snack:</span> Walnuts & green tea</li>
+                <li><span class="meal-icon dinner">Dinner:</span> Salmon with sweet potato & asparagus</li>
+            </ul>
+            <button class="view-details-btn" onclick="showDetails(4)">View Full Plan</button>
+        </div>
+        <div class="card" data-category="light">
+            <div class="card-badge light-badge">Detox</div>
+            <div class="card-image-wrapper">
+                <img src="Images/Day 6 Diet.webp" alt="Green Smoothie" loading="lazy">
+                <div class="card-overlay">
+                    <button class="favorite-btn" onclick="toggleFavorite(this)">♡</button>
+                </div>
+            </div>
+            <h2>Day 6: Detox Day</h2>
+            <div class="nutrition-info">
+                <span class="nutrition-badge"><span class="icon-cal"></span> 350 cal</span>
+                <span class="nutrition-badge"><span class="icon-protein"></span> 20g protein</span>
+            </div>
+            <ul>
+                <li><span class="meal-icon breakfast">Breakfast:</span> Green smoothie with spinach & banana</li>
+                <li><span class="meal-icon snack">Snack:</span> Carrot & cucumber sticks with hummus</li>
+                <li><span class="meal-icon dinner">Dinner:</span> Steamed broccoli with grilled chicken</li>
+            </ul>
+            <button class="view-details-btn" onclick="showDetails(5)">View Full Plan</button>
+        </div>
+        <div class="card" data-category="all">
+            <div class="card-badge">Ultimate Balance</div>
+            <div class="card-image-wrapper">
+                <img src="Images/Day 7 Diet.webp" alt="Quinoa Salad" loading="lazy">
+                <div class="card-overlay">
+                    <button class="favorite-btn" onclick="toggleFavorite(this)">♡</button>
+                </div>
+            </div>
+            <h2>Day 7: Ultimate Balance</h2>
+            <div class="nutrition-info">
+                <span class="nutrition-badge"><span class="icon-cal"></span> 470 cal</span>
+                <span class="nutrition-badge"><span class="icon-protein"></span> 30g protein</span>
+            </div>
+            <ul>
+                <li><span class="meal-icon breakfast">Breakfast:</span> Greek yogurt with granola</li>
+                <li><span class="meal-icon snack">Snack:</span> Almonds & dark chocolate</li>
+                <li><span class="meal-icon dinner">Dinner:</span> Quinoa salad with mixed greens & tofu</li>
+            </ul>
+            <button class="view-details-btn" onclick="showDetails(6)">View Full Plan</button>
+        </div>
+    </div>
+
+    <!-- Modal for Diet Details -->
+    <div id="dietModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <div class="modal-header">
+                <h2 id="modalTitle"></h2>
+                <div id="modalBadge" class="modal-badge"></div>
+            </div>
+            <div class="modal-body">
+                <div class="modal-nutrition">
+                    <div class="nutrition-item">
+                        <span class="nutrition-icon icon-cal"></span>
+                        <span id="modalCalories"></span>
+                    </div>
+                    <div class="nutrition-item">
+                        <span class="nutrition-icon icon-protein"></span>
+                        <span id="modalProtein"></span>
+                    </div>
+                </div>
+                <div class="modal-meals" id="modalMeals"></div>
+                <div class="modal-tips">
+                    <h3><span class="tips-icon"></span> Nutrition Tips</h3>
+                    <ul id="modalTips"></ul>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn" onclick="closeModal()">Got it!</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 FITNESS GUIDE. All Rights Reserved.</p>
+    </footer>
+
+    <script src="../assets/js/theme-manager.js" defer></script>
+    <script>
+        // Filter functionality
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const cards = document.querySelectorAll('.card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Use requestAnimationFrame for smoother transitions
+                requestAnimationFrame(() => {
+                    // Remove active class from all buttons
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+
+                    const filter = btn.getAttribute('data-filter');
+
+                    // Batch DOM reads and writes
+                    const updates = [];
+                    cards.forEach(card => {
+                        const category = card.getAttribute('data-category');
+                        updates.push({
+                            card,
+                            show: filter === 'all' || category === filter
+                        });
+                    });
+
+                    // Apply all updates at once
+                    updates.forEach(({card, show}) => {
+                        if (show) {
+                            card.style.display = 'block';
+                            card.style.animation = 'fadeInUp 0.5s ease-out';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+
+        // Toggle favorite
+        function toggleFavorite(btn) {
+            btn.classList.toggle('active');
+            if (btn.classList.contains('active')) {
+                btn.textContent = '♥';
+                btn.style.color = '#e74c3c';
+            } else {
+                btn.textContent = '♡';
+                btn.style.color = '#fff';
+            }
+        }
+
+        // Diet plan details data
+        const dietDetails = [
+            {
+                title: "Day 1: Balanced Start",
+                badge: "Balanced",
+                calories: "450 cal",
+                protein: "25g protein",
+                meals: [
+                    { icon: "breakfast", name: "Breakfast", item: "Oatmeal with banana & nuts", time: "7:00 AM" },
+                    { icon: "snack", name: "Snack", item: "Greek yogurt with honey", time: "10:30 AM" },
+                    { icon: "dinner", name: "Dinner", item: "Grilled chicken, quinoa, and greens", time: "7:00 PM" }
+                ],
+                tips: ["Stay hydrated throughout the day", "Eat slowly and mindfully", "Prepare meals in advance for convenience"]
+            },
+            {
+                title: "Day 2: Protein & Fiber Boost",
+                badge: "High Protein",
+                calories: "520 cal",
+                protein: "35g protein",
+                meals: [
+                    { icon: "breakfast", name: "Breakfast", item: "Scrambled eggs with whole-grain toast", time: "7:00 AM" },
+                    { icon: "snack", name: "Snack", item: "Almonds & an apple", time: "10:30 AM" },
+                    { icon: "dinner", name: "Dinner", item: "Lentil soup with whole wheat bread", time: "7:00 PM" }
+                ],
+                tips: ["Protein helps build and repair muscles", "Fiber aids in digestion", "Drink water before meals"]
+            },
+            {
+                title: "Day 3: Light & Fresh",
+                badge: "Light & Fresh",
+                calories: "380 cal",
+                protein: "22g protein",
+                meals: [
+                    { icon: "breakfast", name: "Breakfast", item: "Avocado toast with eggs", time: "7:00 AM" },
+                    { icon: "snack", name: "Snack", item: "Mixed berries & nuts", time: "10:30 AM" },
+                    { icon: "dinner", name: "Dinner", item: "Grilled salmon with steamed veggies", time: "7:00 PM" }
+                ],
+                tips: ["Fresh ingredients provide maximum nutrients", "Salmon is rich in Omega-3", "Colorful veggies = more vitamins"]
+            },
+            {
+                title: "Day 4: Energy Boost",
+                badge: "Energy Boost",
+                calories: "480 cal",
+                protein: "28g protein",
+                meals: [
+                    { icon: "breakfast", name: "Breakfast", item: "Chia pudding with almonds", time: "7:00 AM" },
+                    { icon: "snack", name: "Snack", item: "Hummus with whole wheat crackers", time: "10:30 AM" },
+                    { icon: "dinner", name: "Dinner", item: "Grilled tofu with quinoa & spinach", time: "7:00 PM" }
+                ],
+                tips: ["Chia seeds provide sustained energy", "Complex carbs fuel your workouts", "Plant-based proteins are excellent"]
+            },
+            {
+                title: "Day 5: Heart-Healthy",
+                badge: "Heart-Healthy",
+                calories: "500 cal",
+                protein: "32g protein",
+                meals: [
+                    { icon: "breakfast", name: "Breakfast", item: "Whole grain pancakes with berries", time: "7:00 AM" },
+                    { icon: "snack", name: "Snack", item: "Walnuts & green tea", time: "10:30 AM" },
+                    { icon: "dinner", name: "Dinner", item: "Salmon with sweet potato & asparagus", time: "7:00 PM" }
+                ],
+                tips: ["Walnuts support heart health", "Green tea boosts metabolism", "Sweet potatoes are nutrient-dense"]
+            },
+            {
+                title: "Day 6: Detox Day",
+                badge: "Detox",
+                calories: "350 cal",
+                protein: "20g protein",
+                meals: [
+                    { icon: "breakfast", name: "Breakfast", item: "Green smoothie with spinach & banana", time: "7:00 AM" },
+                    { icon: "snack", name: "Snack", item: "Carrot & cucumber sticks with hummus", time: "10:30 AM" },
+                    { icon: "dinner", name: "Dinner", item: "Steamed broccoli with grilled chicken", time: "7:00 PM" }
+                ],
+                tips: ["Green vegetables cleanse the body", "Stay extra hydrated today", "Light meals aid digestion"]
+            },
+            {
+                title: "Day 7: Ultimate Balance",
+                badge: "Ultimate Balance",
+                calories: "470 cal",
+                protein: "30g protein",
+                meals: [
+                    { icon: "breakfast", name: "Breakfast", item: "Greek yogurt with granola", time: "7:00 AM" },
+                    { icon: "snack", name: "Snack", item: "Almonds & dark chocolate", time: "10:30 AM" },
+                    { icon: "dinner", name: "Dinner", item: "Quinoa salad with mixed greens & tofu", time: "7:00 PM" }
+                ],
+                tips: ["Balance is key to sustainable eating", "Dark chocolate in moderation is healthy", "Celebrate your week of healthy eating!"]
+            }
+        ];
+
+        // Show details in modal
+        function showDetails(index) {
+            const detail = dietDetails[index];
+            const modal = document.getElementById('dietModal');
+            
+            document.getElementById('modalTitle').textContent = detail.title;
+            document.getElementById('modalBadge').textContent = detail.badge;
+            document.getElementById('modalCalories').textContent = detail.calories;
+            document.getElementById('modalProtein').textContent = detail.protein;
+            
+            // Populate meals
+            const mealsContainer = document.getElementById('modalMeals');
+            mealsContainer.innerHTML = detail.meals.map(meal => `
+                <div class="meal-item ${meal.icon}">
+                    <span class="meal-time">${meal.name}</span>
+                    <span class="meal-name">${meal.item}</span>
+                    <span class="meal-timing">${meal.time}</span>
+                </div>
+            `).join('');
+            
+            // Populate tips
+            const tipsContainer = document.getElementById('modalTips');
+            tipsContainer.innerHTML = detail.tips.map(tip => `<li>${tip}</li>`).join('');
+            
+            modal.style.display = 'flex';
+            setTimeout(() => modal.classList.add('show'), 10);
+        }
+
+        // Close modal
+        function closeModal() {
+            const modal = document.getElementById('dietModal');
+            modal.classList.remove('show');
+            setTimeout(() => modal.style.display = 'none', 300);
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('dietModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+
+        // Add entrance animation to cards
+        window.addEventListener('load', () => {
+            cards.forEach((card, index) => {
+                card.style.animation = `fadeInUp 0.5s ease-out ${index * 0.1}s both`;
+            });
+        });
+    </script>
+</body>
+</html>

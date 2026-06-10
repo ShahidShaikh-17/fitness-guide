@@ -1,0 +1,429 @@
+/* Shared Workout Styles - FITNESS GUIDE */
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    min-height: 100vh;
+    transition: all 0.3s ease;
+}
+
+.dark-mode {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+}
+
+.container {
+    max-width: 900px;
+    margin: 100px auto 40px;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 30px;
+    border-radius: 25px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+    min-height: 70vh;
+}
+
+.dark-mode .container {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.15);
+}
+
+.video-container {
+    margin: 20px 0;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+.dark-mode .video-container {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.video-container video {
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+}
+
+.workout-name {
+    font-size: 2.2em;
+    font-weight: 700;
+    background: linear-gradient(135deg, #ff6b6b, #ffd93d);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: fadeIn 2s;
+    margin-bottom: 20px;
+}
+
+.timer {
+    font-size: 5em;
+    font-weight: 900;
+    margin: 30px 0;
+    color: #fff;
+    text-shadow: 0 8px 30px rgba(255,107,107,0.6);
+    animation: timerPulse 1s infinite;
+    background: linear-gradient(135deg, #ff6b6b, #ffd93d);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    position: relative;
+}
+
+.timer.countdown-active {
+    animation: countdownPulse 1s infinite;
+    transform: scale(1.2);
+}
+
+.timer.workout-active {
+    animation: workoutGlow 2s infinite;
+    color: #4ecdc4;
+    background: linear-gradient(135deg, #4ecdc4, #44a08d);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.break {
+    font-size: 1.5em;
+    color: #fff;
+    margin: 20px 0;
+    background: rgba(255,107,107,0.3);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,107,107,0.4);
+    padding: 25px;
+    border-radius: 20px;
+    animation: pulse 2s infinite;
+    display: none;
+    font-weight: 600;
+}
+
+.dark-mode .break {
+    background: rgba(255,107,107,0.2);
+    border: 1px solid rgba(255,107,107,0.3);
+}
+
+#status {
+    font-size: 2.5em;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 20px;
+    text-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.workout-counter {
+    font-size: 1.3em;
+    color: rgba(255,255,255,0.9);
+    margin-bottom: 20px;
+    font-weight: 500;
+    animation: slideInUp 0.5s ease;
+}
+
+.progress-container {
+    width: 100%;
+    height: 8px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 10px;
+    margin: 20px 0;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(135deg, #4ecdc4, #44a08d);
+    border-radius: 10px;
+    transition: width 0.3s ease;
+    box-shadow: 0 2px 10px rgba(78,205,196,0.3);
+}
+
+.exercise-info-card {
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    padding: 25px;
+    margin: 20px 0;
+    border: 1px solid rgba(255,255,255,0.2);
+    animation: slideInUp 0.5s ease;
+}
+
+.exercise-tips {
+    font-size: 1.1em;
+    color: rgba(255,255,255,0.8);
+    margin-top: 15px;
+    font-style: italic;
+}
+
+.celebration-container {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(78,205,196,0.9), rgba(68,160,141,0.9));
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    animation: celebrationFadeIn 1s ease;
+}
+
+.celebration-emoji {
+    font-size: 6em;
+    animation: celebrationSpin 3s ease-in-out;
+}
+
+.celebration-text {
+    font-size: 4em;
+    color: #fff;
+    margin-top: 20px;
+    animation: celebrationBounce 2s ease-in-out;
+    text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    font-weight: 900;
+}
+
+.celebration-stars {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.star {
+    position: absolute;
+    color: #ffd93d;
+    font-size: 2em;
+    animation: starFall 3s linear infinite;
+}
+
+@keyframes celebrationFadeIn {
+    0% { opacity: 0; transform: scale(0.8); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes celebrationSpin {
+    0% { transform: rotate(0deg) scale(1); }
+    50% { transform: rotate(180deg) scale(1.2); }
+    100% { transform: rotate(360deg) scale(1); }
+}
+
+@keyframes celebrationBounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-30px); }
+    60% { transform: translateY(-15px); }
+}
+
+@keyframes starFall {
+    0% {
+        transform: translateY(-100px) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(-10px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes timerPulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.05); opacity: 0.8; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes countdownPulse {
+    0% {
+        transform: scale(1.2);
+        text-shadow: 0 8px 30px rgba(255,107,107,0.6);
+    }
+    50% {
+        transform: scale(1.4);
+        text-shadow: 0 12px 40px rgba(255,107,107,0.9);
+    }
+    100% {
+        transform: scale(1.2);
+        text-shadow: 0 8px 30px rgba(255,107,107,0.6);
+    }
+}
+
+@keyframes workoutGlow {
+    0% {
+        text-shadow: 0 8px 30px rgba(78,205,196,0.6);
+        filter: brightness(1);
+    }
+    50% {
+        text-shadow: 0 12px 40px rgba(78,205,196,0.9);
+        filter: brightness(1.2);
+    }
+    100% {
+        text-shadow: 0 8px 30px rgba(78,205,196,0.6);
+        filter: brightness(1);
+    }
+}
+
+@keyframes slideInUp {
+    0% {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes progressBar {
+    0% { width: 0%; }
+    100% { width: 100%; }
+}
+
+button {
+    padding: 12px 30px;
+    margin: 10px;
+    border: none;
+    background: linear-gradient(135deg, #ff6b6b, #ffd93d);
+    color: white;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    animation: fadeIn 1s;
+    box-shadow: 0 8px 25px rgba(255,107,107,0.3);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+button:hover {
+    background: linear-gradient(135deg, #ff5252, #ffeb3b);
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(255,107,107,0.4);
+}
+
+button:active {
+    transform: translateY(-1px);
+}
+
+#nav-button {
+    background: linear-gradient(135deg, #667eea, #764ba2) !important;
+    box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4) !important;
+    z-index: 10000;
+}
+
+#nav-button:hover {
+    background: linear-gradient(135deg, #764ba2, #667eea) !important;
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6) !important;
+}
+
+#back-btn {
+    background: rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+#back-btn:hover {
+    background: rgba(255,255,255,0.3);
+    box-shadow: 0 10px 25px rgba(255,255,255,0.1);
+}
+
+#next-btn {
+    background: linear-gradient(135deg, #4CAF50, #45a049);
+}
+
+#next-btn:hover {
+    background: linear-gradient(135deg, #45a049, #4CAF50);
+}
+
+#skip-btn {
+    background: linear-gradient(135deg, #FF9800, #F57C00);
+}
+
+#skip-btn:hover {
+    background: linear-gradient(135deg, #F57C00, #FF9800);
+}
+
+.is-hidden {
+    display: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        margin: 90px 15px 30px;
+        padding: 20px;
+        max-width: none;
+    }
+
+    .timer {
+        font-size: 4em;
+    }
+
+    #status {
+        font-size: 2em;
+    }
+
+    .workout-name {
+        font-size: 1.8em;
+    }
+
+    .exercise-info-card {
+        padding: 20px;
+    }
+
+    button {
+        padding: 10px 25px;
+        font-size: 0.9em;
+        margin: 8px;
+    }
+
+    .celebration-text {
+        font-size: 3em;
+    }
+
+    .celebration-emoji {
+        font-size: 5em;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        margin: 85px 10px 25px;
+        padding: 15px;
+    }
+
+    .timer {
+        font-size: 3.5em;
+    }
+
+    #status {
+        font-size: 1.8em;
+    }
+
+    .workout-name {
+        font-size: 1.5em;
+    }
+
+    button {
+        padding: 8px 20px;
+        font-size: 0.8em;
+    }
+
+    .celebration-text {
+        font-size: 2.5em;
+    }
+
+    .celebration-emoji {
+        font-size: 4em;
+    }
+}

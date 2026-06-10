@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <title>Login | Fitness Guide</title>
+    <style>
+        body {
+            background-image: url('Images/bg.jpg');
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .login-container {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 400px;
+            width: 100%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .login-container h2 {
+            margin-bottom: 20px;
+            color: #333;
+            text-align: center;
+        }
+        form input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            outline: none;
+            box-sizing: border-box;
+        }
+        form button {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        form button:hover {
+            background-color: #45a049;
+        }
+        .links {
+            margin-top: 15px;
+            text-align: center;
+        }
+        .links a {
+            text-decoration: none;
+            color: #007bff;
+            font-size: 14px;
+            margin: 0 10px;
+        }
+        .links a:hover {
+            text-decoration: underline;
+        }
+        .error-message {
+            color: red;
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+        .success-message {
+            color: green;
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login to Your Account</h2>
+        <div id="message"></div>
+        <form id="loginForm">
+            <input type="email" id="email" name="email" placeholder="Email" required>
+            <input type="password" id="password" name="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+            <div class="links">
+                <p class="forgot-password">
+                    <a href="reset-password.html">Forgot your password?</a>
+                </p>
+                <p class="signup-link">Don't have an account? <a href="signup.html">Sign up</a></p>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const messageDiv = document.getElementById('message');
+            
+            try {
+                console.log('Attempting login...');
+                
+                const response = await fetch('/api/auth/login', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ email, password })
+                });
+                
+                const data = await response.json();
+                console.log('Login response received');
+                
+                if (response.ok) {
+                    messageDiv.innerHTML = '<div class="success-message">Login successful! Redirecting...</div>';
+                    
+                    // Save token and user data to localStorage
+                    localStorage.setItem('token', data.token);
+                    localStorage.setItem('user', JSON.stringify(data.user));
+                    
+                    console.log('Authentication successful - redirecting');
+                    
+                    setTimeout(() => {
+                        window.location.href = 'main.html';
+                    }, 1500);
+                } else {
+                    console.error('Login failed:', response.status);
+                    
+                    // Show helpful error message
+                    if (response.status === 401) {
+                        messageDiv.innerHTML = `<div class="error-message">Invalid email or password. Please check your credentials or <a href="signup.html" style="color: #fff; text-decoration: underline;">sign up</a> if you don't have an account.</div>`;
+                    } else {
+                        messageDiv.innerHTML = `<div class="error-message">${data.message || 'Login failed. Please try again.'}</div>`;
+                    }
+                }
+            } catch (error) {
+                console.error('Login error:', error);
+                messageDiv.innerHTML = '<div class="error-message">Connection error. Please check if the server is running on port 3000.</div>';
+            }
+        });
+    </script>
+</body>
+</html>

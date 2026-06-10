@@ -1,0 +1,1975 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chest Workout Session | FITNESS GUIDE</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <script src="../assets/js/workout-data-manager.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(120, 198, 255, 0.08) 0%, transparent 50%);
+            z-index: -1;
+        }
+
+        .workout-layout {
+            display: flex;
+            width: 100vw;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+
+        .workout-sidebar {
+            flex: 0 0 450px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(30px);
+            border-right: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow:
+                0 0 50px rgba(0, 0, 0, 0.1),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+            padding: 40px;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .workout-sidebar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(180deg,
+                rgba(255, 255, 255, 0.1) 0%,
+                transparent 50%,
+                rgba(255, 255, 255, 0.05) 100%);
+            pointer-events: none;
+        }
+
+        .dark-mode .workout-sidebar {
+            background: rgba(26, 26, 46, 0.95);
+            border-right: 2px solid rgba(154, 218, 102, 0.4);
+            box-shadow:
+                0 0 50px rgba(0, 0, 0, 0.3),
+                inset 0 0 0 1px rgba(154, 218, 102, 0.1);
+        }
+
+        .workout-main {
+            flex: 1;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .workout-main::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(circle at 70% 30%, rgba(102, 126, 234, 0.08) 0%, transparent 70%),
+                radial-gradient(circle at 30% 70%, rgba(118, 75, 162, 0.06) 0%, transparent 70%),
+                radial-gradient(circle at 50% 50%, rgba(154, 218, 102, 0.04) 0%, transparent 60%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .workout-info-section {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 30px;
+            padding: 35px;
+            margin-bottom: 30px;
+            box-shadow:
+                0 15px 35px rgba(0, 0, 0, 0.1),
+                0 5px 15px rgba(255, 255, 255, 0.1);
+            position: relative;
+            z-index: 1;
+        }
+
+        .dark-mode .workout-info-section {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow:
+                0 15px 35px rgba(0, 0, 0, 0.2),
+                0 5px 15px rgba(154, 218, 102, 0.1);
+        }
+
+        .video-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .video-container {
+            width: 100%;
+            height: 100%;
+            max-width: none;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow:
+                0 30px 60px rgba(0, 0, 0, 0.4),
+                0 0 0 1px rgba(255, 255, 255, 0.1),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            position: relative;
+        }
+
+        .video-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg,
+                rgba(255, 255, 255, 0.1) 0%,
+                transparent 50%,
+                rgba(255, 255, 255, 0.05) 100%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .video-container {
+            width: 100%;
+            height: 100%;
+            max-width: none;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow:
+                0 30px 60px rgba(0, 0, 0, 0.4),
+                0 0 0 1px rgba(255, 255, 255, 0.1),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Smart video aspect ratio handling */
+        .video-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 40%; /* Slightly lower to avoid cutting heads */
+            border-radius: 28px;
+            transition: object-fit 0.3s ease, object-position 0.3s ease;
+        }
+
+        /* Fallback for videos with different aspect ratios */
+        @supports not (aspect-ratio: auto) {
+            .video-container {
+                position: relative;
+                padding-bottom: 56.25%; /* 16:9 aspect ratio fallback */
+                height: 0;
+            }
+
+            .video-container video {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+
+        .workout-name {
+            font-size: 3.2em;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ff6b6b, #ffd93d, #ff6b6b);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+            margin-bottom: 30px;
+            animation: gradientShift 4s ease-in-out infinite;
+            text-shadow: 0 5px 20px rgba(255, 107, 107, 0.3);
+            letter-spacing: -0.02em;
+            position: relative;
+            z-index: 2;
+        }
+
+        .dark-mode .workout-name {
+            background: linear-gradient(135deg, #9ada66, #7cb342, #9ada66);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 5px 20px rgba(154, 218, 102, 0.3);
+        }
+
+        .progress-timer-section {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 25px;
+            backdrop-filter: blur(15px);
+            position: relative;
+            z-index: 1;
+        }
+
+        .dark-mode .progress-timer-section {
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .timer {
+            font-size: 6em;
+            font-weight: 900;
+            margin: 25px 0;
+            background: linear-gradient(135deg, #ff6b6b, #ffd93d, #ff6b6b);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 10px 40px rgba(255, 107, 107, 0.4);
+            animation: timerPulse 1.2s infinite, gradientShift 4s ease-in-out infinite;
+            position: relative;
+            line-height: 1;
+        }
+
+        .dark-mode .timer {
+            background: linear-gradient(135deg, #4ecdc4, #44a08d, #4ecdc4);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 10px 40px rgba(78, 205, 196, 0.4);
+        }
+
+        #status {
+            font-size: 2.4em;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            text-shadow: 0 3px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .workout-counter {
+            font-size: 1.3em;
+            color: rgba(102, 126, 234, 0.9);
+            margin-bottom: 25px;
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 10px 20px;
+            border-radius: 25px;
+            display: inline-block;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.2);
+        }
+
+        .dark-mode .workout-counter {
+            color: rgba(154, 218, 102, 0.9);
+            background: rgba(154, 218, 102, 0.15);
+            box-shadow: 0 4px 15px rgba(154, 218, 102, 0.2);
+        }
+
+        .progress-container {
+            width: 100%;
+            height: 14px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
+            margin: 30px 0;
+            overflow: hidden;
+            box-shadow:
+                inset 0 2px 4px rgba(0, 0, 0, 0.1),
+                0 2px 8px rgba(255, 255, 255, 0.1);
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(135deg, #4ecdc4, #44a08d);
+            border-radius: 12px;
+            transition: width 0.5s ease;
+            box-shadow:
+                0 3px 12px rgba(78, 205, 196, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            position: relative;
+        }
+
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg,
+                transparent,
+                rgba(255, 255, 255, 0.4),
+                transparent);
+            animation: shimmer 2.5s infinite;
+        }
+
+        .exercise-info-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            padding: 30px;
+            margin: 25px 0;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            animation: slideInUp 0.7s ease;
+            box-shadow:
+                0 12px 30px rgba(0, 0, 0, 0.1),
+                0 5px 15px rgba(255, 255, 255, 0.1);
+        }
+
+        .dark-mode .exercise-info-card {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow:
+                0 12px 30px rgba(0, 0, 0, 0.2),
+                0 5px 15px rgba(154, 218, 102, 0.1);
+        }
+
+        .exercise-tips {
+            font-size: 1.15em;
+            color: rgba(102, 126, 234, 0.85);
+            margin-top: 20px;
+            font-style: italic;
+            background: rgba(102, 126, 234, 0.1);
+            padding: 15px;
+            border-radius: 15px;
+            border-left: 5px solid #667eea;
+            line-height: 1.6;
+        }
+
+        .dark-mode .exercise-tips {
+            color: rgba(154, 218, 102, 0.85);
+            background: rgba(154, 218, 102, 0.1);
+            border-left-color: #9ada66;
+        }
+
+        .break {
+            font-size: 1.7em;
+            color: #fff;
+            margin: 30px 0;
+            background: linear-gradient(135deg,
+                rgba(255, 107, 107, 0.95),
+                rgba(255, 193, 7, 0.95));
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            padding: 30px;
+            border-radius: 25px;
+            animation: pulse 2.2s infinite;
+            display: none;
+            font-weight: 700;
+            text-shadow: 0 3px 15px rgba(0, 0, 0, 0.3);
+            box-shadow:
+                0 12px 30px rgba(255, 107, 107, 0.3),
+                0 5px 15px rgba(255, 193, 7, 0.2);
+            text-align: center;
+        }
+
+        .dark-mode .break {
+            background: linear-gradient(135deg,
+                rgba(255, 107, 107, 0.85),
+                rgba(255, 193, 7, 0.85));
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .workout-navigation {
+            display: flex;
+            justify-content: center;
+            gap: 18px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .quit-button {
+            background: linear-gradient(135deg, #dc3545, #c82333);
+            color: white;
+            border: none;
+            padding: 20px 40px;
+            font-size: 1.15em;
+            font-weight: 600;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow:
+                0 10px 30px rgba(220, 53, 69, 0.3),
+                0 5px 15px rgba(220, 53, 69, 0.2);
+            margin-top: 30px;
+            width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .quit-button:hover {
+            background: linear-gradient(135deg, #c82333, #a71e2a);
+            transform: translateY(-3px);
+            box-shadow:
+                0 15px 40px rgba(220, 53, 69, 0.4),
+                0 8px 20px rgba(220, 53, 69, 0.3);
+        }
+
+        .confirmation-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(8px);
+        }
+
+        .confirmation-content {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            padding: 50px;
+            border-radius: 30px;
+            text-align: center;
+            max-width: 480px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            box-shadow:
+                0 25px 70px rgba(0, 0, 0, 0.5),
+                0 0 0 1px rgba(255, 255, 255, 0.1);
+            animation: modalSlideIn 0.4s ease;
+        }
+
+        .confirmation-content h3 {
+            color: #ff6b6b;
+            margin-bottom: 30px;
+            font-size: 2em;
+            text-shadow: 0 3px 15px rgba(255, 107, 107, 0.4);
+        }
+
+        .confirmation-content p {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 40px;
+            line-height: 1.7;
+            font-size: 1.15em;
+        }
+
+        .confirmation-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .confirm-btn, .cancel-btn {
+            padding: 16px 35px;
+            border: none;
+            border-radius: 18px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .confirm-btn {
+            background: linear-gradient(135deg, #dc3545, #c82333);
+            color: white;
+            box-shadow: 0 8px 25px rgba(220, 53, 69, 0.3);
+        }
+
+        .confirm-btn:hover {
+            background: linear-gradient(135deg, #c82333, #a71e2a);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(220, 53, 69, 0.4);
+        }
+
+        .cancel-btn {
+            background: linear-gradient(135deg, #6c757d, #5a6268);
+            color: white;
+            box-shadow: 0 8px 25px rgba(108, 117, 125, 0.3);
+        }
+
+        .cancel-btn:hover {
+            background: linear-gradient(135deg, #5a6268, #495057);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(108, 117, 125, 0.4);
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        @keyframes modalSlideIn {
+            0% {
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .workout-layout {
+                flex-direction: column;
+            }
+
+            .workout-sidebar {
+                flex: none;
+                max-width: none;
+                border-right: none;
+                border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+                padding: 20px;
+            }
+
+            .workout-main {
+                min-height: 60vh;
+            }
+
+            .video-section {
+                padding: 20px;
+            }
+
+            .video-container {
+                max-width: 100%;
+                border-radius: 25px;
+            }
+
+            .video-container video {
+                border-radius: 23px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .workout-sidebar {
+                padding: 15px;
+            }
+
+            .workout-name {
+                font-size: 2em;
+            }
+
+            .timer {
+                font-size: 4em;
+            }
+
+            .workout-navigation {
+                gap: 10px;
+            }
+
+            .confirmation-content {
+                margin: 20px;
+                padding: 30px 20px;
+            }
+            .video-container {
+                border-radius: 20px;
+            }
+
+            @media (max-width: 480px) {
+                .workout-layout {
+                    margin: 85px auto 25px;
+                    padding: 0 10px;
+                }
+
+                .timer {
+                    font-size: 3.5em;
+                }
+
+                .workout-name {
+                    font-size: 1.3em;
+                }
+
+                .workout-navigation button {
+                    padding: 8px 12px;
+                    font-size: 0.8em;
+                }
+            }
+        }
+        @keyframes celebrationFadeIn {
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes celebrationSpin {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.2); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+
+        @keyframes celebrationBounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-30px); }
+            60% { transform: translateY(-15px); }
+        }
+
+        @keyframes starFall {
+            0% { 
+                transform: translateY(-100px) rotate(0deg); 
+                opacity: 1; 
+            }
+            100% { 
+                transform: translateY(100vh) rotate(360deg); 
+                opacity: 0; 
+            }
+        }
+
+@keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(-10px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes timerPulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.05); opacity: 0.8; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes countdownPulse {
+    0% { 
+        transform: scale(1.2); 
+        text-shadow: 0 8px 30px rgba(255,107,107,0.6);
+    }
+    50% { 
+        transform: scale(1.4); 
+        text-shadow: 0 12px 40px rgba(255,107,107,0.9);
+    }
+    100% { 
+        transform: scale(1.2); 
+        text-shadow: 0 8px 30px rgba(255,107,107,0.6);
+    }
+}
+
+@keyframes workoutGlow {
+    0% { 
+        text-shadow: 0 8px 30px rgba(78,205,196,0.6);
+        filter: brightness(1);
+    }
+    50% { 
+        text-shadow: 0 12px 40px rgba(78,205,196,0.9);
+        filter: brightness(1.2);
+    }
+    100% { 
+        text-shadow: 0 8px 30px rgba(78,205,196,0.6);
+        filter: brightness(1);
+    }
+}
+
+@keyframes confetti {
+    0% { transform: translateY(0) rotate(0); }
+    100% { transform: translateY(-1000px) rotate(360deg); }
+}
+
+@keyframes textZoom {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+
+
+@keyframes textShine {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+@keyframes textBounce {
+    0%, 100% { 
+        transform: translateY(0px) scale(1); 
+    }
+    50% { 
+        transform: translateY(-10px) scale(1.02); 
+    }
+}
+
+@keyframes textGlow {
+    0%, 100% { 
+        text-shadow: 
+            0 10px 30px rgba(255, 215, 0, 0.3),
+            0 0 20px rgba(255, 215, 0, 0.2);
+    }
+    50% { 
+        text-shadow: 
+            0 15px 40px rgba(255, 215, 0, 0.6),
+            0 0 30px rgba(255, 215, 0, 0.4),
+            0 0 40px rgba(255, 255, 255, 0.2);
+    }
+}
+
+
+@keyframes backgroundPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
+}
+
+@keyframes burstOut {
+    0% { 
+        transform: translate(-50%, -50%) scale(1); 
+        opacity: 1; 
+    }
+    100% { 
+        transform: translate(calc(-50% + var(--burst-x)), calc(-50% + var(--burst-y))) scale(0); 
+        opacity: 0; 
+    }
+}
+
+
+@keyframes videoFadeIn {
+    0% { 
+        opacity: 0; 
+        transform: scale(1.02);
+    }
+    100% { 
+        opacity: 1; 
+        transform: scale(1);
+    }
+}
+
+@keyframes progressBar {
+    0% { width: 0%; }
+    100% { width: 100%; }
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+/* Professional Celebration Container Styles */
+.celebration-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.1) 0%, transparent 70%),
+        linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    animation: celebrationFadeIn 1.5s ease;
+    overflow: hidden;
+}
+
+.celebration-video-container {
+    width: 100%;
+    height: 100%;
+    max-width: 800px;
+    max-height: 450px;
+    border-radius: 25px;
+    overflow: hidden;
+    margin-bottom: 30px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.celebration-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 25px;
+    animation: videoFadeIn 2s ease-in-out;
+}
+
+.celebration-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(255, 215, 0, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(255, 215, 0, 0.03) 0%, transparent 50%);
+    animation: backgroundPulse 4s ease-in-out infinite;
+}
+
+
+
+.celebration-text {
+    font-size: 3.5em;
+    font-weight: 900;
+    background: linear-gradient(135deg, #ffd700, #ffed4e, #ffd700);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+    animation: 
+        textShine 3s ease-in-out infinite,
+        textBounce 2s ease-in-out infinite 1s,
+        textGlow 4s ease-in-out infinite;
+    text-align: center;
+    margin-bottom: 30px;
+    letter-spacing: 2px;
+    transform-origin: center;
+    z-index: 15;
+    position: relative;
+}
+
+
+        button {
+            padding: 12px 30px;
+            margin: 10px;
+            border: none;
+            background: linear-gradient(135deg, #ff6b6b, #ffd93d);
+            color: white;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            animation: fadeIn 1s;
+            box-shadow: 0 8px 25px rgba(255,107,107,0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, #ff5252, #ffeb3b);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255,107,107,0.4);
+        }
+
+        button:active {
+            transform: translateY(-1px);
+        }
+
+        #back-btn {
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: rgba(255,255,255,0.9);
+        }
+
+        #back-btn:hover {
+            background: rgba(255,255,255,0.3);
+            box-shadow: 0 10px 25px rgba(255,255,255,0.1);
+            color: white;
+        }
+
+        /* Enhanced light mode back button styling */
+        :not(.dark-mode) #back-btn {
+            background: rgba(102, 126, 234, 0.15);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            color: rgba(102, 126, 234, 0.9);
+        }
+
+        :not(.dark-mode) #back-btn:hover {
+            background: rgba(102, 126, 234, 0.25);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.2);
+            color: #667eea;
+        }
+        
+        #next-btn {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+        }
+        
+        #next-btn:hover {
+            background: linear-gradient(135deg, #45a049, #4CAF50);
+        }
+        
+        #skip-btn {
+            background: linear-gradient(135deg, #FF9800, #F57C00);
+        }
+        
+        #skip-btn:hover {
+            background: linear-gradient(135deg, #F57C00, #FF9800);
+        }
+        
+        .is-hidden {
+            display: none;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .workout-sidebar {
+                padding: 15px;
+            }
+
+            .workout-name {
+                font-size: 2em;
+            }
+
+            .timer {
+                font-size: 4em;
+            }
+
+            .workout-navigation {
+                gap: 10px;
+            }
+
+            .confirmation-content {
+                margin: 20px;
+                padding: 30px 20px;
+            }
+
+            .video-container {
+                border-radius: 20px;
+            }
+
+            .video-container video {
+                border-radius: 18px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .workout-sidebar {
+                padding: 10px;
+            }
+
+            .workout-name {
+                font-size: 1.8em;
+            }
+
+            .timer {
+                font-size: 3.5em;
+            }
+
+            .confirmation-content {
+                margin: 15px;
+                padding: 25px 15px;
+            }
+
+            .video-container {
+                border-radius: 15px;
+            }
+
+            .video-container video {
+                border-radius: 13px;
+            }
+        }
+    
+.timer.countdown-active {
+    font-size: 4rem;
+    color: #ff6b6b;
+    animation: countdownPulse 1s ease-in-out infinite;
+    text-shadow: 0 0 20px rgba(255, 107, 107, 0.5);
+}
+
+.timer.workout-active {
+    font-size: 2.5rem;
+    color: #4CAF50;
+    animation: none;
+}
+
+@keyframes workoutGlow {
+    0% { 
+        text-shadow: 0 8px 30px rgba(78,205,196,0.6);
+        filter: brightness(1);
+    }
+    50% { 
+        text-shadow: 0 12px 40px rgba(78,205,196,0.9);
+        filter: brightness(1.2);
+    }
+    100% { 
+        text-shadow: 0 8px 30px rgba(78,205,196,0.6);
+        filter: brightness(1);
+    }
+}
+
+        /* BEAUTIFUL REST ANIMATIONS */
+        .rest-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.95), rgba(139, 195, 74, 0.95));
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            animation: restFadeIn 0.5s ease-out;
+        }
+
+        .rest-container {
+            text-align: center;
+            color: white;
+            max-width: 400px;
+            padding: 2rem;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: restSlideUp 0.6s ease-out;
+        }
+
+        .rest-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            animation: restPulse 2s infinite;
+        }
+
+        .rest-message {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+
+        .rest-countdown-circle {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 2rem;
+        }
+
+        .rest-circle-bg {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            position: absolute;
+        }
+
+        .rest-circle-progress {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: conic-gradient(#fff 0deg, transparent 0deg);
+            position: absolute;
+            transition: background 1s linear;
+        }
+
+        .rest-time-display {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .rest-breathing-guide {
+            margin: 2rem 0;
+            font-size: 1.1rem;
+            opacity: 0.8;
+        }
+
+        .breathing-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            margin: 1rem auto;
+            animation: breathingAnimation 4s infinite ease-in-out;
+        }
+
+        .rest-skip-hint {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            opacity: 0.7;
+            animation: restBlink 2s infinite;
+        }
+
+        .next-exercise-preview {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            font-size: 0.95rem;
+            opacity: 0.8;
+        }
+
+        /* ANIMATIONS */
+        @keyframes restFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes restSlideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes restPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes breathingAnimation {
+            0%, 100% { 
+                transform: scale(1);
+                opacity: 0.6;
+            }
+            50% { 
+                transform: scale(1.3);
+                opacity: 1;
+            }
+        }
+
+        @keyframes restBlink {
+            0%, 50% { opacity: 0.7; }
+            51%, 100% { opacity: 0.3; }
+        }
+
+        @keyframes countdownPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .rest-time-display.pulse {
+            animation: countdownPulse 0.6s ease-out;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .rest-container {
+                max-width: 90%;
+                padding: 1.5rem;
+            }
+            
+            .rest-title {
+                font-size: 2rem;
+            }
+            
+            .rest-countdown-circle {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .rest-time-display {
+                font-size: 2rem;
+            }
+        }
+
+        /* DARK MODE SUPPORT */
+        .dark-mode .rest-overlay {
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.95), rgba(139, 195, 74, 0.95));
+        }
+
+        </style>
+</head>
+<body>
+    <div class="workout-layout">
+        <!-- Left Sidebar - Progress & Info -->
+        <div class="workout-sidebar">
+            <div class="workout-info-section">
+                <div class="progress-timer-section">
+                    <h2 id="status">Get Ready!</h2>
+                    <div class="timer" id="timer">3</div>
+                    <div class="workout-counter" id="workout-counter"></div>
+
+                    <div class="progress-container is-hidden" id="progress-container">
+                        <div class="progress-bar" id="progress-bar"></div>
+                    </div>
+                </div>
+
+                <div class="exercise-info-card is-hidden" id="exercise-info">
+                    <div id="exercise-description"></div>
+                    <div class="exercise-tips" id="exercise-tips"></div>
+                </div>
+
+                <div class="break" id="break">Rest for 5s</div>
+
+                <div class="workout-navigation">
+                    <button id="back-btn" class="is-hidden">← Back</button>
+                    <button id="next-btn" class="is-hidden">Next →</button>
+                    <button id="skip-btn" class="is-hidden">Skip →→</button>
+                </div>
+
+                <button class="quit-button" onclick="showQuitConfirmation()">Quit Workout</button>
+            </div>
+        </div>
+
+        <!-- Right Main - Video Player -->
+        <div class="workout-main">
+            <div class="video-section">
+                <div id="workout-name" class="workout-name"></div>
+                <div class="video-container">
+                    <video id="exercise-video" autoplay loop muted>
+                        <source id="video-source" src="" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quit Confirmation Modal -->
+    <div class="confirmation-modal" id="quitModal">
+        <div class="confirmation-content">
+            <h3>Quit Workout?</h3>
+            <p>Are you sure you want to quit? Your progress won't be saved.</p>
+            <div class="confirmation-buttons">
+                <button class="confirm-btn" onclick="quitWorkout()">Yes, Quit</button>
+                <button class="cancel-btn" onclick="hideQuitConfirmation()">No, Continue</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Professional Celebration Overlay -->
+    <div class="celebration-container" id="celebration-container">
+        <div class="celebration-video-container">
+            <video class="celebration-video" id="celebration-video" autoplay muted loop>
+                <source src="Videos/Celebration video.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="celebration-text">WORKOUT COMPLETE!</div>
+    </div>
+    <script>
+        // ONLY ACTUAL EXERCISES - NO REST PERIODS IN ARRAY
+        const exercises = [
+            { 
+                name: "Push-Up - 15 reps", video: "Videos/Push-Up.mp4",
+                description: "Classic chest strengthening exercise.",
+                tip: "Keep your body in a straight line and lower yourself until your chest nearly touches the ground."
+            },
+            { 
+                name: "Incline Push-up - 12 reps", video: "Videos/Incline Push-up.mp4",
+                description: "Upper chest targeting variation.",
+                tip: "Use a bench or elevated surface to target the upper chest muscles."
+            },
+            { 
+                name: "Wide Arm Push-up - 10 reps", video: "Videos/Wide Arm Push-up.mp4",
+                description: "Targets outer chest muscles.",
+                tip: "Place hands wider than shoulder-width apart for better chest activation."
+            },
+            { 
+                name: "Diamond Push-up - 8 reps", video: "Videos/Diamond Push-up.mp4",
+                description: "Focuses on inner chest and triceps.",
+                tip: "Form a diamond shape with your hands and keep elbows close to your body."
+            },
+            { 
+                name: "Knee Push-up - 10 reps", video: "Videos/Knee Push-up.mp4",
+                description: "Modified push-up for building strength.",
+                tip: "Keep your body straight from knees to head."
+            }
+        ];
+
+        console.log('💪 Chest Workout loaded with', exercises.length, 'exercises');
+
+        let currentExercise = 0;
+        let restInterval;
+        let isResting = false;
+        let countdownInterval;
+        let speechSynthesis = window.speechSynthesis;
+        let isVoiceEnabled = true;
+        let isCurrentlySpeaking = false;
+        let speechQueue = [];
+
+        // FIXED SPEECH SYNTHESIS - No overlapping, proper timing, handles abbreviations
+        function speak(text, delay = 0, priority = false) {
+            if (!isVoiceEnabled || !speechSynthesis) return;
+            
+            setTimeout(() => {
+                if (priority) {
+                    speechSynthesis.cancel();
+                    speechQueue = [];
+                    isCurrentlySpeaking = false;
+                }
+                
+                if (isCurrentlySpeaking && !priority) {
+                    speechQueue.push(text);
+                    return;
+                }
+                
+                // Enhanced text cleaning with abbreviation handling
+                // First remove special characters but KEEP hyphens temporarily
+                let cleanedText = text
+                    .replace(/[^a-zA-Z0-9\s\-]/g, '')
+                    .replace(/\s+/g, ' ')
+                    .trim();
+                
+                // Handle common abbreviations and compound words BEFORE removing hyphens
+                const replacements = {
+                    'ABS': 'abs',
+                    'Abs': 'abs',
+                    'Push-Up': 'push up',
+                    'Push-up': 'push up',
+                    'Push Up': 'push up',
+                    'Push up': 'push up',
+                    'Pushup': 'push up',
+                    'PushUp': 'push up',
+                    'Wide Arm Push-Up': 'wide arm push up',
+                    'Wide Arm Push-up': 'wide arm push up',
+                    'Wide Arm Push Up': 'wide arm push up',
+                    'Wide Arm Push up': 'wide arm push up',
+                    'Incline Push-Up': 'incline push up',
+                    'Incline Push-up': 'incline push up',
+                    'Incline Push Up': 'incline push up',
+                    'Incline Push up': 'incline push up',
+                    'Decline Push-Up': 'decline push up',
+                    'Decline Push-up': 'decline push up',
+                    'Decline Push Up': 'decline push up',
+                    'Decline Push up': 'decline push up',
+                    'Diamond Push-Up': 'diamond push up',
+                    'Diamond Push-up': 'diamond push up',
+                    'Diamond Push Up': 'diamond push up',
+                    'Diamond Push up': 'diamond push up',
+                    'Prone Tricep Push-Up': 'prone tricep push up',
+                    'Prone Tricep Push-up': 'prone tricep push up',
+                    'Prone tricep push-up': 'prone tricep push up',
+                    'Prone Tricep Push Up': 'prone tricep push up',
+                    'Prone Tricep Push up': 'prone tricep push up',
+                    'Prone tricep push up': 'prone tricep push up',
+                    'Knee Push-Up': 'knee push up',
+                    'Knee Push-up': 'knee push up',
+                    'Knee Push Up': 'knee push up',
+                    'Knee Push up': 'knee push up',
+                    'Wall Push-Up': 'wall push up',
+                    'Wall Push-up': 'wall push up',
+                    'Wall Push Up': 'wall push up',
+                    'Wall Push up': 'wall push up',
+                    'Wide Arm': 'wide arm',
+                    'Incline': 'incline',
+                    'Decline': 'decline',
+                    'Diamond': 'diamond',
+                    'Prone': 'prone',
+                    'Tricep': 'tricep',
+                    'Bicep': 'bicep',
+                    'Wall': 'wall'
+                };
+                
+                // Apply replacements BEFORE removing remaining hyphens
+                for (const [key, value] of Object.entries(replacements)) {
+                    const regex = new RegExp('\\b' + key + '\\b', 'gi');
+                    cleanedText = cleanedText.replace(regex, value);
+                }
+                
+                // NOW remove any remaining hyphens
+                cleanedText = cleanedText.replace(/-/g, ' ').replace(/\s+/g, ' ').trim();
+                
+                const utterance = new SpeechSynthesisUtterance(cleanedText);
+                utterance.rate = 0.9;
+                utterance.pitch = 1;
+                utterance.volume = 0.8;
+                
+                utterance.onstart = () => { 
+                    isCurrentlySpeaking = true; 
+                    console.log('🔊 Speaking:', cleanedText);
+                };
+                
+                utterance.onend = () => { 
+                    isCurrentlySpeaking = false;
+                    // Process next item in queue after delay
+                    setTimeout(() => {
+                        if (speechQueue.length > 0) {
+                            const nextText = speechQueue.shift();
+                            speak(nextText, 0, false);
+                        }
+                    }, 500);
+                };
+                
+                utterance.onerror = () => {
+                    isCurrentlySpeaking = false;
+                    console.log('❌ Speech error');
+                };
+                
+                speechSynthesis.speak(utterance);
+            }, delay);
+        }
+
+        // FIXED COUNTDOWN - No speech errors
+        function startCountdown() {
+            console.log('🚀 Starting countdown...');
+            
+            const timerElement = document.getElementById("timer");
+            const statusElement = document.getElementById("status");
+            
+            if (statusElement) {
+                statusElement.innerText = "Get Ready!";
+            }
+            
+            let count = 3;
+            
+            if (timerElement) {
+                timerElement.textContent = count;
+                timerElement.classList.remove("is-hidden");
+                timerElement.classList.add("countdown-active");
+            }
+            
+            // Announce workout start with proper delay
+            speak("Get ready for your chest workout", 1200, true);
+            
+            countdownInterval = setInterval(() => {
+                console.log('Countdown:', count);
+                
+                if (timerElement) {
+                    timerElement.textContent = count;
+                }
+                
+                // Speak countdown numbers with proper timing
+                if (count > 0) {
+                    speak(count.toString(), 200, false);
+                }
+                
+                count--;
+                
+                if (count < 0) {
+                    clearInterval(countdownInterval);
+                    console.log('✅ Starting workout!');
+                    
+                    if (statusElement) {
+                        statusElement.innerText = "Workout in Progress";
+                    }
+                    
+                    if (timerElement) {
+                        timerElement.classList.remove("countdown-active");
+                        timerElement.classList.add("workout-active");
+                        timerElement.textContent = "GO!";
+                    }
+                    
+                    // Start enhanced workout timer
+                    if (window.workoutTimer) {
+                        window.workoutTimer.startWorkout('CHEST', 'Chest Workout Session');
+                    }
+                    
+                    // Show workout controls
+                    document.getElementById("progress-container").classList.remove("is-hidden");
+                    document.getElementById("exercise-info").classList.remove("is-hidden");
+                    document.querySelector(".video-container").classList.remove("is-hidden");
+                    document.getElementById("next-btn").classList.remove("is-hidden");
+                    document.getElementById("skip-btn").classList.remove("is-hidden");
+                    document.getElementById("back-btn").classList.remove("is-hidden");
+                    
+                    // Start first exercise with proper delay
+                    speak("Let's begin!", 500, true);
+                    setTimeout(() => loadExercise(0), 1500);
+                }
+            }, 1000);
+        }
+
+        // FIXED EXERCISE LOADING - Correct counting
+        function loadExercise(index) {
+            clearInterval(restInterval);
+            isResting = false;
+
+            if (index >= exercises.length) {
+                endWorkout();
+                return;
+            }
+
+            currentExercise = index;
+            const exercise = exercises[index];
+            
+            console.log(`📋 Loading exercise ${index + 1} of ${exercises.length}: ${exercise.name}`);
+            
+            // Update video
+            document.getElementById("video-source").src = exercise.video;
+            document.getElementById("exercise-video").load();
+            document.getElementById("workout-name").innerText = exercise.name;
+            
+            // CORRECT EXERCISE COUNTING - Only actual exercises
+            document.getElementById("workout-counter").innerText = `Exercise ${index + 1} of ${exercises.length}`;
+            document.getElementById("timer").innerText = index + 1;
+            
+            // Update exercise info
+            document.getElementById("exercise-description").innerText = exercise.description;
+            document.getElementById("exercise-tips").innerText = "Tip: " + exercise.tip;
+            
+            // CORRECT PROGRESS - Only based on actual exercises
+            const progressPercentage = ((index + 1) / exercises.length) * 100;
+            document.getElementById("progress-bar").style.width = progressPercentage + "%";
+            
+            // Hide rest indicator
+            document.getElementById("break").classList.add("is-hidden");
+            
+            // Announce exercise with proper delay to prevent overlapping
+            // Extract just the exercise name (remove rep count but keep full name)
+            const exerciseName = exercise.name.replace(/\s*-\s*\d+.*$/, '').trim();
+            speak(exerciseName, 800, false);
+        }
+
+        // FIXED REST HANDLING - Proper positioning and logic
+        function startRest() {
+            if (currentExercise + 1 >= exercises.length) {
+                // No rest after last exercise
+                endWorkout();
+                return;
+            }
+
+            console.log('😴 Starting animated rest period');
+            isResting = true;
+            
+            // Create beautiful rest overlay
+            createRestOverlay();
+            
+            let restTime = 10;
+            updateRestDisplay(restTime, 10);
+            
+            // Announce rest with proper delay
+            speak("Take a rest and breathe", 500, false);
+            
+            restInterval = setInterval(() => {
+                restTime--;
+                updateRestDisplay(restTime, 10);
+                
+                if (restTime === 3) {
+                    speak("Get ready for the next exercise", 0, false);
+                    // Preview next exercise
+                    if (currentExercise + 1 < exercises.length) {
+                        const nextExercise = exercises[currentExercise + 1];
+                        const previewElement = document.querySelector('.next-exercise-preview');
+                        if (previewElement) {
+                            previewElement.innerHTML = `
+                                <strong>Next Exercise:</strong><br>
+                                ${nextExercise.name.replace(/-.*/, '').trim()}
+                            `;
+                        }
+                    }
+                }
+                
+                if (restTime <= 0) {
+                    clearInterval(restInterval);
+                    isResting = false;
+                    removeRestOverlay();
+                    loadExercise(currentExercise + 1);
+                }
+            }, 1000);
+        }
+
+        function createRestOverlay() {
+            // Remove any existing rest overlay
+            removeRestOverlay();
+            
+            const overlay = document.createElement('div');
+            overlay.id = 'rest-overlay';
+            overlay.className = 'rest-overlay';
+            
+            const nextExerciseName = currentExercise + 1 < exercises.length ? 
+                exercises[currentExercise + 1].name.replace(/-.*/, '').trim() : 
+                'Workout Complete';
+            
+            overlay.innerHTML = `
+                <div class="rest-container">
+                    <div class="rest-title">Take a Rest</div>
+                    <div class="rest-message">Great job! Take a moment to breathe and recover.</div>
+                    
+                    <div class="rest-countdown-circle">
+                        <div class="rest-circle-bg"></div>
+                        <div class="rest-circle-progress" id="rest-circle-progress"></div>
+                        <div class="rest-time-display" id="rest-time-display">10</div>
+                    </div>
+                    
+                    <div class="rest-breathing-guide">
+                        <div>Breathe deeply</div>
+                        <div class="breathing-circle"></div>
+                        <div>In... and out...</div>
+                    </div>
+                    
+                    <div class="next-exercise-preview">
+                        <strong>Next Exercise:</strong><br>
+                        ${nextExerciseName}
+                    </div>
+                    
+                    <div class="rest-skip-hint">
+                        Press "Skip" button to continue early
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(overlay);
+            
+            // Add click handlers for early skip
+            overlay.addEventListener('click', (e) => {
+                if (e.target === overlay) {
+                    // Skip rest when clicking outside the container
+                    skipRest();
+                }
+            });
+        }
+
+        function updateRestDisplay(currentTime, totalTime) {
+            const timeDisplay = document.getElementById('rest-time-display');
+            const circleProgress = document.getElementById('rest-circle-progress');
+            
+            if (timeDisplay) {
+                timeDisplay.textContent = currentTime;
+                // Add pulse animation on each second
+                timeDisplay.classList.add('pulse');
+                setTimeout(() => {
+                    timeDisplay.classList.remove('pulse');
+                }, 600);
+            }
+            
+            if (circleProgress) {
+                const progress = ((totalTime - currentTime) / totalTime) * 360;
+                circleProgress.style.background = `conic-gradient(#fff ${progress}deg, transparent ${progress}deg)`;
+            }
+        }
+
+        function removeRestOverlay() {
+            const overlay = document.getElementById('rest-overlay');
+            if (overlay) {
+                overlay.style.animation = 'restFadeIn 0.3s ease-out reverse';
+                setTimeout(() => {
+                    overlay.remove();
+                }, 300);
+            }
+        }
+
+        function skipRest() {
+            if (isResting) {
+                clearInterval(restInterval);
+                isResting = false;
+                removeRestOverlay();
+                loadExercise(currentExercise + 1);
+            }
+        }
+
+        function endWorkout() {
+            clearInterval(countdownInterval);
+            clearInterval(restInterval);
+            
+            // Stop all speech
+            speechSynthesis.cancel();
+            speechQueue = [];
+            isCurrentlySpeaking = false;
+            
+            let workoutTimerData = null;
+            if (window.workoutTimer) {
+                workoutTimerData = window.workoutTimer.endWorkout();
+            }
+            
+            saveWorkoutData(workoutTimerData);
+            
+            // Hide workout elements
+            document.querySelector(".video-container").classList.add("is-hidden");
+            document.getElementById("next-btn").classList.add("is-hidden");
+            document.getElementById("skip-btn").classList.add("is-hidden");
+            document.getElementById("back-btn").classList.add("is-hidden");
+            document.getElementById("break").classList.add("is-hidden");
+            document.getElementById("progress-container").classList.add("is-hidden");
+            document.getElementById("exercise-info").classList.add("is-hidden");
+
+            // Show completion
+            document.getElementById("progress-bar").style.width = "100%";
+            document.getElementById("celebration-container").style.display = "flex";
+            
+            const celebrationVideo = document.getElementById("celebration-video");
+            if (celebrationVideo) {
+                celebrationVideo.play().catch(e => console.log('Video autoplay prevented'));
+            }
+            
+            // Congratulations with proper delay
+            speak("Congratulations! You completed your chest workout!", 1500, true);
+            
+            setTimeout(() => {
+                addNavigationButton();
+            }, 3000);
+        }
+
+        // FIXED BUTTON LOGIC
+        function handleNext() {
+            if (isResting) {
+                // Skip rest period
+                skipRest();
+                return;
+            }
+            if (isResting) {
+                // Skip rest period
+                clearInterval(restInterval);
+                isResting = false;
+                loadExercise(currentExercise + 1);
+            } else if (currentExercise + 1 < exercises.length) {
+                // Start rest period
+                startRest();
+            } else {
+                // End workout
+                endWorkout();
+            }
+        }
+
+        function handleSkip() {
+            if (isResting) {
+                // Skip rest period
+                skipRest();
+                return;
+            }
+            if (isResting) {
+                // Skip rest and go to next exercise
+                clearInterval(restInterval);
+                isResting = false;
+                loadExercise(currentExercise + 1);
+            } else if (currentExercise + 1 < exercises.length) {
+                // Skip current exercise and go to next
+                loadExercise(currentExercise + 1);
+            } else {
+                // End workout
+                endWorkout();
+            }
+        }
+
+        function handleBack() {
+            if (currentExercise > 0) {
+                clearInterval(restInterval);
+                isResting = false;
+                loadExercise(currentExercise - 1);
+            }
+        }
+
+        // Data management functions (unchanged but verified)
+        async function saveWorkoutData(timerData = null) {
+            try {
+                console.log('💾 Saving workout data, timer data:', timerData);
+                
+                // Use new timer data structure with proper duration handling
+                const actualDurationMinutes = timerData ? timerData.duration : calculateWorkoutDuration();
+                const actualDurationSeconds = timerData ? timerData.durationSeconds : (calculateWorkoutDuration() * 60);
+                const durationFormatted = timerData ? timerData.durationFormatted : formatDurationDisplay(actualDurationSeconds);
+                
+                console.log(`⏱️ Duration - Minutes: ${actualDurationMinutes}, Seconds: ${actualDurationSeconds}, Formatted: ${durationFormatted}`);
+                
+                const workoutData = {
+                    workoutType: 'Chest Workout',
+                    completedDate: new Date().toISOString().split('T')[0],
+                    exercisesCompleted: exercises.length,
+                    totalExercises: exercises.length,
+                    completionRate: 100,
+                    duration: actualDurationMinutes, // Keep for backward compatibility
+                    durationSeconds: actualDurationSeconds, // New accurate field
+                    durationFormatted: durationFormatted, // Human readable format
+                    actualStartTime: timerData ? timerData.start_time : null,
+                    actualEndTime: timerData ? timerData.end_time : null,
+                    timestamp: Date.now()
+                };
+
+                let stats = JSON.parse(localStorage.getItem('workoutStats') || '{}');
+                
+                if (!stats.workoutTypes) stats.workoutTypes = {};
+                if (!stats.totalWorkouts) stats.totalWorkouts = 0;
+                if (!stats.totalDuration) stats.totalDuration = 0;
+                if (!stats.totalDurationSeconds) stats.totalDurationSeconds = 0;
+                if (!stats.recentWorkouts) stats.recentWorkouts = [];
+                
+                stats.totalWorkouts++;
+                stats.totalDuration += workoutData.duration || 0;
+                
+                // Add seconds tracking for accuracy
+                if (workoutData.durationSeconds) {
+                    stats.totalDurationSeconds += workoutData.durationSeconds;
+                }
+                
+                const workoutType = workoutData.workoutType || 'Chest Workout';
+                if (!stats.workoutTypes[workoutType]) {
+                    stats.workoutTypes[workoutType] = { count: 0, totalDuration: 0, totalDurationSeconds: 0 };
+                }
+                stats.workoutTypes[workoutType].count++;
+                stats.workoutTypes[workoutType].totalDuration += workoutData.duration || 0;
+                
+                if (workoutData.durationSeconds) {
+                    stats.workoutTypes[workoutType].totalDurationSeconds += workoutData.durationSeconds;
+                }
+                
+                stats.recentWorkouts.unshift({
+                    type: workoutType,
+                    date: workoutData.completedDate,
+                    duration: workoutData.duration,
+                    durationSeconds: workoutData.durationSeconds,
+                });
+                
+                // Use the new workout data manager for user-specific storage
+                if (typeof saveUserWorkoutData === 'function') {
+                    saveUserWorkoutData(workoutData);
+                    updateUserWorkoutStats(workoutData);
+                } else {
+                    // Fallback to legacy storage if data manager not loaded
+                    let workoutHistory = JSON.parse(localStorage.getItem('workoutHistory') || '[]');
+                    workoutHistory.push(workoutData);
+                    if (workoutHistory.length > 50) {
+                        workoutHistory = workoutHistory.slice(-50);
+                    }
+                    localStorage.setItem('workoutHistory', JSON.stringify(workoutHistory));
+                    updateWorkoutStats(workoutData);
+                }
+
+                // Save to server database
+                const token = localStorage.getItem('token');
+                if (token) {
+                    try {
+                        const response = await fetch('http://localhost:3000/api/workouts/add', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Authorization': `Bearer ${token}`
+                            },
+                            body: JSON.stringify({
+                                workout_type: 'chest',
+                                exercise_name: 'Chest Workout',
+                                sets: exercises.length,
+                                reps: 0,
+                                duration: actualDurationMinutes,
+                                duration_seconds: actualDurationSeconds,
+                                weight: 0,
+                                calories_burned: 0,
+                                notes: `Completed ${exercises.length} exercises`
+                            })
+                        });
+
+                        if (response.ok) {
+                            console.log('✅ Workout data saved to server');
+                            window.dispatchEvent(new CustomEvent('workoutCompleted', {
+                                detail: { workoutType: 'chest', data: workoutData }
+                            }));
+                        } else {
+                            console.warn('⚠️ Server save failed:', response.status);
+                        }
+                    } catch (serverError) {
+                        console.warn('⚠️ Server unavailable, but localStorage saved:', serverError);
+                    }
+                } else {
+                    console.warn('⚠️ No authentication token, data saved locally only');
+                }
+                
+                localStorage.setItem('workoutCompleted', 'true');
+                
+                console.log('✅ Chest workout data saved successfully');
+                
+            } catch (error) {
+                console.error('❌ Error saving workout data:', error);
+            }
+        }
+
+        function calculateWorkoutDuration() {
+            const exerciseDuration = 30;
+            const restDuration = 10;
+            const totalDuration = (exercises.length * exerciseDuration) + ((exercises.length - 1) * restDuration);
+            return Math.round(totalDuration / 60);
+        }
+
+        function formatDurationDisplay(seconds) {
+            if (seconds < 60) {
+                return `${seconds}s`;
+            } else if (seconds < 3600) {
+                const minutes = Math.floor(seconds / 60);
+                const remainingSeconds = seconds % 60;
+                return remainingSeconds > 0 ? `${minutes}m ${remainingSeconds}s` : `${minutes}m`;
+            } else {
+                const hours = Math.floor(seconds / 3600);
+                const minutes = Math.floor((seconds % 3600) / 60);
+                return `${hours}h ${minutes}m`;
+            }
+        }
+
+        function addNavigationButton() {
+            const celebrationContainer = document.getElementById("celebration-container");
+            if (!celebrationContainer || document.getElementById("nav-button")) return;
+
+            const buttonContainer = document.createElement("div");
+            buttonContainer.style.cssText = `display: flex; gap: 15px; margin-top: 30px; flex-wrap: wrap; justify-content: center; position: relative; z-index: 20;`;
+
+            const mainButton = document.createElement("button");
+            mainButton.id = "nav-button";
+            mainButton.innerHTML = "Main Page";
+            mainButton.style.cssText = `background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; padding: 15px 25px; font-size: 18px; font-weight: 600; border-radius: 12px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);`;
+
+            const homeButton = document.createElement("button");
+            homeButton.innerHTML = "View Stats";
+            homeButton.style.cssText = `background: linear-gradient(135deg, #28a745, #20c997); color: white; border: none; padding: 15px 25px; font-size: 18px; font-weight: 600; border-radius: 12px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 5px 20px rgba(40, 167, 69, 0.4);`;
+
+            mainButton.onclick = () => window.location.href = "../main.html";
+            homeButton.onclick = () => window.location.href = "../Home.html";
+
+            buttonContainer.appendChild(mainButton);
+            buttonContainer.appendChild(homeButton);
+            celebrationContainer.appendChild(buttonContainer);
+        }
+
+        function showQuitConfirmation() {
+            document.getElementById('quitModal').style.display = 'flex';
+        }
+
+        function hideQuitConfirmation() {
+            document.getElementById('quitModal').style.display = 'none';
+        }
+
+        function quitWorkout() {
+            clearInterval(countdownInterval);
+            clearInterval(restInterval);
+            
+            if (window.workoutTimer) {
+                window.workoutTimer.quitWorkout();
+            }
+            
+            speechSynthesis.cancel();
+            speechQueue = [];
+            isCurrentlySpeaking = false;
+            
+            const celebrationVideo = document.getElementById("celebration-video");
+            if (celebrationVideo) {
+                celebrationVideo.pause();
+                celebrationVideo.currentTime = 0;
+            }
+            
+            currentExercise = 0;
+            isResting = false;
+            
+            hideQuitConfirmation();
+            window.location.href = '../main.html';
+        }
+
+        // Event listeners
+        document.getElementById("next-btn").addEventListener("click", handleNext);
+        document.getElementById("skip-btn").addEventListener("click", handleSkip);
+        document.getElementById("back-btn").addEventListener("click", handleBack);
+
+        document.getElementById('quitModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                hideQuitConfirmation();
+            }
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                hideQuitConfirmation();
+            }
+        });
+
+        // Initialize workout
+        console.log('🎯 Initializing Chest Workout with', exercises.length, 'exercises');
+        startCountdown();
+    </script>
+    
+    <script src="../assets/js/workout-timer.js" defer></script>
+    <script src="../assets/js/script.js" defer></script>
+</body>
+</html>

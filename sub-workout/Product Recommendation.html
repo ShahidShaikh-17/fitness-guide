@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gym Product Recommendations</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/sections.css">
+    <link rel="stylesheet" href="./product-styles.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <div class="Nav-bar">   
+        <nav>
+            <h2 id="logo"><span>FITNESS GUIDE</span></h2>
+            <ul>
+                <li><a href="../main.html">Main</a></li>
+                <li><a href="../Home.html">Home</a></li>
+                <li><a href="../about.html">About</a></li>
+                <li><a href="../contact.html">Contact</a></li> 
+                <li><a href="../Help.html">Help</a></li> 
+                <li><button class="theme-toggle-nav" id="themeToggleNav">
+                    <span id="themeIconNav">🌙</span>
+                </button></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Header Section -->
+    <header class="product-header">
+        <h1>Gym Product Recommendations</h1>
+        <p>Premium Quality Equipment for Your Fitness Journey</p>
+        
+        <!-- Search Bar -->
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Search products..." class="search-input">
+        </div>
+        
+        <!-- Category Filter -->
+        <div class="category-filter">
+            <button class="category-btn active" data-category="all">All Products</button>
+            <button class="category-btn" data-category="equipment">Equipment</button>
+            <button class="category-btn" data-category="accessories">Accessories</button>
+            <button class="category-btn" data-category="nutrition">Nutrition</button>
+        </div>
+    </header>
+
+    <!-- Main Content Section -->
+    <div class="container" id="product-list"></div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 FITNESS GUIDE. All Rights Reserved.</p>
+    </footer>
+
+    <script src="../assets/js/theme-manager.js" defer></script>
+
+    <script>
+        // Array of Gym Products with enhanced data
+        const products = [
+            {
+                name: "Adjustable Dumbbells",
+                description: "Perfect for home workouts with adjustable weights.",
+                image: "./Images/Adjustable dumbbells.webp",
+                link: "https://dl.flipkart.com/s/BCUeOluuuN",
+                category: "equipment",
+                rating: 4.5,
+                badge: "Best Seller"
+            },
+            {
+                name: "High-Quality Yoga Mat",
+                description: "Durable and non-slip surface for a comfortable workout.",
+                image: "./Images/Yoga mat.webp",
+                link: "https://dl.flipkart.com/s/BCEMAluuuN",
+                category: "accessories",
+                rating: 4.7,
+                badge: "Trending"
+            },
+            {
+                name: "Resistance Bands Set",
+                description: "Great for strength training and flexibility exercises.",
+                image: "./Images/Resistance bands.webp",
+                link: "https://dl.flipkart.com/s/wd988_NNNN",
+                category: "accessories",
+                rating: 4.3,
+                badge: "Popular"
+            },
+            {
+                name: "Whey Protein Powder",
+                description: "Boost muscle growth and recovery post-workout.",
+                image: "./Images/Whey protein powder.webp",
+                link: "https://dl.flipkart.com/s/wdz4R_NNNN",
+                category: "nutrition",
+                rating: 4.6,
+                badge: "Top Rated"
+            },
+            {
+                name: "Treadmill",
+                description: "High-quality treadmill for indoor cardio workouts.",
+                image: "./Images/Treadmill.webp",
+                link: "https://dl.flipkart.com/s/wdZIQ_NNNN",
+                category: "equipment",
+                rating: 4.4,
+                badge: "Premium"
+            },
+            {
+                name: "Kettlebell Set",
+                description: "Perfect for strength training and endurance workouts.",
+                image: "./Images/Kettlebells.webp",
+                link: "https://dl.flipkart.com/s/wFuZzWNNNN",
+                category: "equipment",
+                rating: 4.5,
+                badge: "Best Value"
+            }
+        ];
+
+        // Function to Load Products Dynamically (Optimized with DocumentFragment)
+        function loadProducts(filteredProducts = products) {
+            const productList = document.getElementById("product-list");
+            
+            // Use requestAnimationFrame for smoother rendering
+            requestAnimationFrame(() => {
+                productList.innerHTML = '';
+
+                if (filteredProducts.length === 0) {
+                    productList.innerHTML = '<div class="no-results">No products found. Try a different search or filter.</div>';
+                    return;
+                }
+
+                // Use DocumentFragment for better performance
+                const fragment = document.createDocumentFragment();
+
+                filteredProducts.forEach((product, index) => {
+                    const productCard = document.createElement("div");
+                    productCard.classList.add("product");
+                    productCard.setAttribute('data-category', product.category);
+                    productCard.style.animation = `fadeInUp 0.5s ease-out ${index * 0.1}s both`;
+
+                    // Generate star rating
+                    const stars = generateStars(product.rating);
+
+                    productCard.innerHTML = `
+                        <div class="product-badge">${product.badge}</div>
+                        <button class="wishlist-btn" onclick="toggleWishlist(this, '${product.name}')">
+                            <span class="heart-icon">♡</span>
+                        </button>
+                        <div class="product-image-wrapper">
+                            <img src="${product.image}" alt="${product.name}" loading="lazy">
+                            <div class="product-overlay">
+                                <button class="quick-view-btn" onclick="quickView('${product.name}')">Quick View</button>
+                            </div>
+                        </div>
+                        <div class="product-content">
+                            <h2>${product.name}</h2>
+                            <div class="rating-container">
+                                <div class="stars">${stars}</div>
+                                <span class="rating-text">${product.rating}/5</span>
+                            </div>
+                            <p>${product.description}</p>
+                            <div class="product-footer">
+                                <a href="${product.link}" target="_blank" class="buy-btn">
+                                    <span>View Product</span>
+                                </a>
+                            </div>
+                        </div>
+                    `;
+
+                    fragment.appendChild(productCard);
+                });
+
+                // Single DOM update
+                productList.appendChild(fragment);
+            });
+        }
+
+        // Generate star rating HTML
+        function generateStars(rating) {
+            let stars = '';
+            const fullStars = Math.floor(rating);
+            const hasHalfStar = rating % 1 !== 0;
+
+            for (let i = 0; i < fullStars; i++) {
+                stars += '★';
+            }
+            if (hasHalfStar) {
+                stars += '½';
+            }
+            const emptyStars = 5 - Math.ceil(rating);
+            for (let i = 0; i < emptyStars; i++) {
+                stars += '☆';
+            }
+            return stars;
+        }
+
+        // Category Filter
+        const categoryBtns = document.querySelectorAll('.category-btn');
+        categoryBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                categoryBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const category = btn.getAttribute('data-category');
+                const filtered = category === 'all' 
+                    ? products 
+                    : products.filter(p => p.category === category);
+                
+                loadProducts(filtered);
+            });
+        });
+
+        // Debounce function for better performance
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        // Search Functionality with debouncing
+        const searchInput = document.getElementById('searchInput');
+        const debouncedSearch = debounce((searchTerm) => {
+            const filtered = products.filter(p => 
+                p.name.toLowerCase().includes(searchTerm) || 
+                p.description.toLowerCase().includes(searchTerm)
+            );
+            loadProducts(filtered);
+        }, 300);
+
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            debouncedSearch(searchTerm);
+        });
+
+        // Toggle Wishlist
+        function toggleWishlist(btn, productName) {
+            btn.classList.toggle('active');
+            const heartIcon = btn.querySelector('.heart-icon');
+            
+            if (btn.classList.contains('active')) {
+                heartIcon.textContent = '♥';
+                showNotification(`${productName} added to wishlist!`);
+            } else {
+                heartIcon.textContent = '♡';
+                showNotification(`${productName} removed from wishlist.`);
+            }
+        }
+
+        // Quick View
+        function quickView(productName) {
+            const product = products.find(p => p.name === productName);
+            alert(`Quick View: ${product.name}\n\nRating: ${product.rating}/5\n\n${product.description}\n\nClick 'View Product' to see pricing and purchase options on the retailer's website.`);
+        }
+
+        // Show Notification
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.textContent = message;
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 100);
+
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => notification.remove(), 300);
+            }, 2500);
+        }
+
+        // Load Products when Page Loads
+        document.addEventListener("DOMContentLoaded", () => {
+            loadProducts();
+        });
+    </script>
+</body>
+</html>

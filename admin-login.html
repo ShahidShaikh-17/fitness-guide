@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - FITNESS GUIDE</title>
+    <style>
+        * { box-sizing: border-box; }
+        body { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #2563eb, #7c3aed, #db2777); }
+        .card { width: 100%; max-width: 420px; background: rgba(255,255,255,0.95); border-radius: 16px; padding: 28px; box-shadow: 0 12px 40px rgba(0,0,0,0.15); }
+        h1 { margin: 0 0 6px; color: #111827; font-size: 22px; }
+        p.sub { margin: 0 0 20px; color: #6b7280; font-size: 14px; }
+        label { display: block; margin: 12px 0 6px; color: #374151; font-weight: 600; font-size: 14px; }
+        input { width: 100%; padding: 12px 14px; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 15px; outline: none; transition: border-color .2s; }
+        input:focus { border-color: #667eea; }
+        .btn { width: 100%; margin-top: 16px; background: #667eea; color: #fff; border: 0; padding: 12px 14px; border-radius: 10px; font-weight: 600; cursor: pointer; }
+        .btn:hover { background: #5a67d8; }
+        .note { margin-top: 10px; color: #6b7280; font-size: 12px; text-align: center; }
+        .error { background: #fde8e8; color: #c81e1e; border: 1px solid #f8b4b4; padding: 10px; border-radius: 8px; margin-bottom: 12px; display: none; }
+        .success { background: #e3f9e5; color: #046c4e; border: 1px solid #84e1bc; padding: 10px; border-radius: 8px; margin-bottom: 12px; display: none; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Admin Login</h1>
+        <p class="sub">Use your admin credentials to access the dashboard.</p>
+        <div id="msg" class="error"></div>
+        <div id="ok" class="success">Login successful. Redirecting…</div>
+        <label for="username">Username</label>
+        <input id="username" type="text" placeholder="Username" autocomplete="username">
+        <label for="password">Password</label>
+        <input id="password" type="password" placeholder="Password" autocomplete="current-password">
+        <button class="btn" onclick="adminLogin()">Login</button>
+        <div class="note" style="display:none"></div>
+    </div>
+    <script>
+        function adminLogin() {
+            const u = document.getElementById('username').value.trim();
+            const p = document.getElementById('password').value;
+            const msg = document.getElementById('msg');
+            const ok = document.getElementById('ok');
+            msg.style.display = 'none';
+            ok.style.display = 'none';
+            if (u === 'admin' && p === 'admin@fg321') {
+                try {
+                    localStorage.setItem('isAdmin', 'true');
+                    ok.style.display = 'block';
+                    setTimeout(() => { window.location.href = 'admin-dashboard.html'; }, 600);
+                } catch (e) {
+                    msg.textContent = 'Storage error. Please allow site data/storage.';
+                    msg.style.display = 'block';
+                }
+            } else {
+                msg.textContent = 'Invalid credentials.';
+                msg.style.display = 'block';
+            }
+        }
+        // Allow Enter key
+        document.addEventListener('keydown', function(e){ if (e.key === 'Enter') adminLogin(); });
+    </script>
+    
+</body>
+</html>
+
